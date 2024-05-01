@@ -1,0 +1,5 @@
+PRODUCT_NAME = flutter_pokedex
+
+PRODUCT_BUNDLE_IDENTIFIER = es.devest.flutterPokedex
+
+PRODUCT_COPYRIGHT = Copyright © 2024 es.devest. All rights reserved.
