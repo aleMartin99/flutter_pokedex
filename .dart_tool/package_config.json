@@ -68,12 +68,6 @@
       "languageVersion": "2.19"
     },
     {
-      "name": "dio",
-      "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/dio-5.4.3+1",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
       "name": "equatable",
       "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/equatable-2.0.5",
       "packageUri": "lib/",
@@ -410,7 +404,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-02T16:48:18.370762Z",
+  "generated": "2024-05-02T19:28:22.755557Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }

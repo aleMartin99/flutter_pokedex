@@ -7,4 +7,7 @@ class AppRoutes {
 
   /// path to access to pokemonDetails screen route
   static String get pokemonDetailsScreenRoute => '/pokemonDetails';
+
+  /// path to access to pokedex screen route
+  static String get pokedexScreenRoute => '/pokedex';
 }

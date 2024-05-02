@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter_pokedex/core/constants/pokemon_types.dart';
 import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model.dart';
 import 'package:flutter_pokedex/data/models/pokemon_model/stat.dart';
 
@@ -22,6 +25,10 @@ class Pokemon {
       id: pokemonModel.id,
       name: pokemonModel.name,
       height: pokemonModel.height,
+      weight: pokemonModel.weight,
+      stats: pokemonModel.stats,
+      types:
+          pokemonModel.types!.map((e) => PokemonTypes.parse(e.type!)).toList(),
       image: pokemonModel.sprites!.image,
       livePreview: pokemonModel.sprites!.livePreview,
 
@@ -52,7 +59,10 @@ class Pokemon {
   final List<Stat>? stats;
 
   /// A list of types this Pokémon has.
-  final List<Type>? types;
+  final List<PokemonTypes>? types;
+
+  /// The Pokémon's color based on first type.
+  Color get color => types!.first.color;
 
   /// Is caught
   bool isCaught;

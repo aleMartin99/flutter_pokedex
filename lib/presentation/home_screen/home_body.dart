@@ -1,13 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/core/theme/colors.dart';
 import 'package:flutter_pokedex/presentation/home_screen/components/category_card.dart';
 import 'package:flutter_pokedex/presentation/home_screen/components/header.dart';
 
+/// HomeBody class
 class HomeBody extends StatefulWidget {
   @override
-  _HomeBodyState createState() => _HomeBodyState();
+  State<HomeBody> createState() => _HomeBodyState();
 }
 
 class _HomeBodyState extends State<HomeBody> {
@@ -26,10 +28,15 @@ class _HomeBodyState extends State<HomeBody> {
           CategoryCard(
             title: 'Pokedex',
             color: AppColors.red,
-            onPressed: () {},
+            onPressed: () async {
+              await Navigator.pushNamed(
+                context,
+                AppRoutes.pokedexScreenRoute,
+              );
+            },
           ),
           CategoryCard(
-            title: 'Caught',
+            title: 'Captured',
             color: AppColors.blue,
             onPressed: () {},
           ),

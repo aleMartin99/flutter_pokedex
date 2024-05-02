@@ -14,7 +14,8 @@ import 'package:http/http.dart' as http;
 class PokemonDatasource implements IPokemonDatasource {
   @override
   Future<Either<Failure, List<PokemonModel>>> getPokemons(
-      List<dynamic> pokemonSubset) async {
+    List<dynamic> pokemonSubset,
+  ) async {
     final resultFetchPokemonList = await fetchPokemonList();
     if (resultFetchPokemonList.isRight()) {
       final resultFetchPokemonDetailsSubset = await fetchPokemonDetailsSubset(
@@ -86,7 +87,7 @@ Future<Either<Failure, List<PokemonModel>>> fetchPokemonDetailsSubset(
           .map((pokemon) {
         if (pokemon.isRight()) {
           return PokemonModel.fromJson(
-            pokemon as Map<String, dynamic>,
+            ((pokemon) as Right).value as Map<String, dynamic>,
           );
         } else {
           throw Exception();

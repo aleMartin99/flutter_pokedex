@@ -13,17 +13,15 @@ class Sprites extends Equatable {
   }
 
   factory Sprites.fromMap(Map<String, dynamic> data) => Sprites(
-        image: ((['other'] as Map<String, dynamic>)['official-artwork']
-                    as Map<String, dynamic>)['front_default'] ==
+        image: (data['other']['official-artwork']['front_default']
+                    as String?) ==
                 null
             ? ''
-            : (['official-artwork'] as Map<String, dynamic>)['front_default']
-                as String?,
+            : (data['other']['official-artwork']['front_default'] as String?),
         livePreview:
             (data['other']['showdown']['front_default'] as String?) == null
                 ? ''
-                : (['showdown'] as Map<String, dynamic>)['front_default']
-                    as String?,
+                : data['other']['showdown']['front_default'] as String?,
       );
 
   final String? image;

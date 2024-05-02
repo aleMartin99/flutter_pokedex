@@ -1,32 +1,21 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 class Type extends Equatable {
-  factory Type.fromMap(Map<String, dynamic> data) => Type(
-        type: data['type'] == null
-            ? null
-            : Type.fromMap(data['type'] as Map<String, dynamic>),
-      );
-
   const Type({this.type});
+  factory Type.fromMap(Map<String, dynamic> data) => Type(
+        type:
+            ((data['type'] as Map<String, dynamic>)['name'] as String?) == null
+                ? ''
+                : ((data['type'] as Map<String, dynamic>)['name'] as String?),
+      );
 
   /// `dart:convert`
   ///
   /// Parses the string and returns the resulting Json object as [Type].
-  factory Type.fromJson(String data) {
-    return Type.fromMap(json.decode(data) as Map<String, dynamic>);
+  factory Type.fromJson(Map<String, dynamic> data) {
+    return Type.fromMap(data);
   }
-  final Type? type;
-
-  Map<String, dynamic> toMap() => {
-        'type': type?.toMap(),
-      };
-
-  /// `dart:convert`
-  ///
-  /// Converts [Type] to a JSON string.
-  String toJson() => json.encode(toMap());
+  final String? type;
 
   @override
   List<Object?> get props => [type];

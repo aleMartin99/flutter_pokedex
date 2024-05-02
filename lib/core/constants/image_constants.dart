@@ -5,4 +5,7 @@ class ImageConstants {
 
   /// pokeball image path
   static const String pokeball = '${basePath}pokeball.png';
+
+  /// charmander image path
+  static const String charmander = '${basePath}charmander.png';
 }
