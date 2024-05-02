@@ -68,6 +68,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "dio",
+      "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/dio-5.4.3+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "equatable",
       "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/equatable-2.0.5",
       "packageUri": "lib/",
@@ -142,6 +148,12 @@
     {
       "name": "http_parser",
       "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "infinite_scroll_pagination",
+      "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/infinite_scroll_pagination-3.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -272,6 +284,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "sliver_tools",
+      "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/sliver_tools-0.2.12",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "source_span",
       "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/source_span-1.10.0",
       "packageUri": "lib/",
@@ -356,6 +374,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "visibility_detector",
+      "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/visibility_detector-0.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "vm_service",
       "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/vm_service-13.0.0",
       "packageUri": "lib/",
@@ -386,7 +410,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-01T12:51:16.144256Z",
+  "generated": "2024-05-02T16:48:18.370762Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }

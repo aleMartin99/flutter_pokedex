@@ -1,0 +1,4 @@
+#Thu May 02 13:14:13 CEST 2024
+base.0=/Users/ale/Projects/Flutter Projects/DevestSolutions/Test/flutter_pokedex/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

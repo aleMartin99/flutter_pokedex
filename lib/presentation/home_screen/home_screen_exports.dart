@@ -1,2 +1,2 @@
-export '/presentation/home_screen/components/home_body.dart';
-export '/presentation/home_screen/home_screen.dart';
+export 'home_body.dart';
+export 'home_screen.dart';

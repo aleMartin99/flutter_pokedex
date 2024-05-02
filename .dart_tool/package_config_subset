@@ -42,6 +42,10 @@ cupertino_icons
 2.19
 file:///Users/ale/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.6/
 file:///Users/ale/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.6/lib/
+dio
+2.15
+file:///Users/ale/.pub-cache/hosted/pub.dev/dio-5.4.3+1/
+file:///Users/ale/.pub-cache/hosted/pub.dev/dio-5.4.3+1/lib/
 equatable
 2.12
 file:///Users/ale/.pub-cache/hosted/pub.dev/equatable-2.0.5/
@@ -86,6 +90,10 @@ http_parser
 2.12
 file:///Users/ale/.pub-cache/hosted/pub.dev/http_parser-4.0.2/
 file:///Users/ale/.pub-cache/hosted/pub.dev/http_parser-4.0.2/lib/
+infinite_scroll_pagination
+2.12
+file:///Users/ale/.pub-cache/hosted/pub.dev/infinite_scroll_pagination-3.2.0/
+file:///Users/ale/.pub-cache/hosted/pub.dev/infinite_scroll_pagination-3.2.0/lib/
 leak_tracker
 3.1
 file:///Users/ale/.pub-cache/hosted/pub.dev/leak_tracker-10.0.0/
@@ -166,6 +174,10 @@ rxdart
 2.12
 file:///Users/ale/.pub-cache/hosted/pub.dev/rxdart-0.27.7/
 file:///Users/ale/.pub-cache/hosted/pub.dev/rxdart-0.27.7/lib/
+sliver_tools
+2.12
+file:///Users/ale/.pub-cache/hosted/pub.dev/sliver_tools-0.2.12/
+file:///Users/ale/.pub-cache/hosted/pub.dev/sliver_tools-0.2.12/lib/
 source_span
 2.18
 file:///Users/ale/.pub-cache/hosted/pub.dev/source_span-1.10.0/
@@ -222,6 +234,10 @@ very_good_analysis
 3.0
 file:///Users/ale/.pub-cache/hosted/pub.dev/very_good_analysis-5.1.0/
 file:///Users/ale/.pub-cache/hosted/pub.dev/very_good_analysis-5.1.0/lib/
+visibility_detector
+2.12
+file:///Users/ale/.pub-cache/hosted/pub.dev/visibility_detector-0.2.2/
+file:///Users/ale/.pub-cache/hosted/pub.dev/visibility_detector-0.2.2/lib/
 vm_service
 3.0
 file:///Users/ale/.pub-cache/hosted/pub.dev/vm_service-13.0.0/

@@ -1,9 +1,8 @@
+import 'package:flutter_pokedex/app.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_pokedex/main.dart';
 
 void main() {
   testWidgets('Test', (WidgetTester tester) async {
-    await tester.pumpWidget(const Pokedex());
+    await tester.pumpWidget(const App());
   });
 }

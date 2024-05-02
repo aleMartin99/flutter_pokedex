@@ -6,5 +6,6 @@ class ApiHelper {
   /// Url to request pokemons
   /// For mvp purposes only fetching 151 pokemons, this pokemons
   /// corresponds to Kanto region
+  /// //TODO condition limit
   static String getPokemonsUrl = 'pokemon?limit=151';
 }
