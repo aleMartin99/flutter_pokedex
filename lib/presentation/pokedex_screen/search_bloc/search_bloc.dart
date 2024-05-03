@@ -9,19 +9,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> with BaseBloc {
   ///
   SearchBloc() : super(SearchState()) {
     on<SearchActivatedEvent>((event, emit) {
-      if (!isClosed) {
-        secureEmit(
-          SearchState(isSearching: true, searchWord: event.searchWord),
-        );
-      }
+      secureEmit(
+        SearchState(isSearching: true, searchWord: event.searchWord),
+      );
     });
 
     on<SearchDeactivatedEvent>((event, emit) {
-      if (!isClosed) {
-        secureEmit(
-          SearchState(isSearching: false, searchWord: ''),
-        );
-      }
+      secureEmit(
+        SearchState(isSearching: false, searchWord: ''),
+      );
     });
   }
 }

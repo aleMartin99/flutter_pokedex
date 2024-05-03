@@ -9,7 +9,7 @@ import 'package:flutter_pokedex/data/models/pokemon_model/stat.dart';
 class Pokemon {
   ///
   Pokemon({
-    required this.isCaught,
+    required this.isCaptured,
     this.id,
     this.name,
     this.height,
@@ -41,7 +41,7 @@ class Pokemon {
       livePreview: pokemonModel.sprites!.livePreview,
 
       /// By default is false because there is no info about it in the api
-      isCaught: false,
+      isCaptured: false,
     );
   }
 
@@ -72,6 +72,6 @@ class Pokemon {
   /// The Pokémon's color based on first type.
   Color get color => types!.first.color;
 
-  /// Is caught
-  bool isCaught;
+  /// isCaptured
+  bool isCaptured;
 }

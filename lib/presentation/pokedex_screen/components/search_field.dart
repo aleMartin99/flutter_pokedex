@@ -14,6 +14,21 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
+  late final searchBlocContextToDispose;
+
+  @override
+  void initState() {
+    // Storing a reference to the context of the SearchBloc
+    searchBlocContextToDispose = context.read<SearchBloc>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchBlocContextToDispose.add(SearchDeactivatedEvent());
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,13 +49,13 @@ class _SearchFieldState extends State<SearchField> {
           }
         },
         decoration: const InputDecoration(
-            contentPadding:
-                EdgeInsets.symmetric(horizontal: 20, vertical: 13.5),
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            hintText: 'Search a pokemon',
-            prefixIcon: Icon(Icons.search)),
+          contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 13.5),
+          border: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          hintText: 'Search a pokemon',
+          prefixIcon: Icon(Icons.search),
+        ),
       ),
     );
   }

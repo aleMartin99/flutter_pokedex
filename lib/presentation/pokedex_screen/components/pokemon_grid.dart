@@ -37,7 +37,6 @@ class _PokemonGridState extends State<PokemonGrid> {
 
   @override
   void dispose() {
-    //TODO add el search event deactivate
     _scrollKey.currentState?.innerController.dispose();
     _scrollKey.currentState?.dispose();
 

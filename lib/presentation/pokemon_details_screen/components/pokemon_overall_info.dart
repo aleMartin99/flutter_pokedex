@@ -122,11 +122,11 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
             onPressed: () => Navigator.pop(context),
             icon: Image(
               image: AssetImage(
-                pokemon.isCaught
+                pokemon.isCaptured
                     ? ImageConstants.capturedIcon
                     : ImageConstants.notCapturedIcon,
               ),
-              height: pokemon.isCaught ? 30 : 26,
+              height: pokemon.isCaptured ? 30 : 26,
             ),
           ),
         ],

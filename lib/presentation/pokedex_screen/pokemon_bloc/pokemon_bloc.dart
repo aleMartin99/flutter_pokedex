@@ -26,6 +26,17 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
         final pokemonsList =
             (responseGetPokemons as Right).value as List<Pokemon>? ?? [];
 
+        // /// Checks if the pokemon is already captured
+        // for (var i = 0; i < pokemonsList.length; i++) {
+        //   //TOdo check if the pokemon is in db already
+        //   if (favoriteRadioStations.contains(
+        //     pokemonsList[i].id,
+        //   )) {
+        //     /// Mark the radio station as favorited in the radioStations list
+        //     pokemonsList[i].isCaptured = true;
+        //   }
+        // }
+
         secureEmit(
           state.copyWith(
             status: PokemonStatus.success,
@@ -42,6 +53,27 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
         );
       }
     });
+
+    // on<OnToggleCapturedPokemonEvent>((event, emit) async {
+    //   emit(state.copyWith(status: PokemonStatus.loadingToggleCaptured));
+    //   event.isCaptured
+    //       ? await _prefs.addFavoriteRadioStationId(
+    //           event.radioStationId,
+    //         )
+    //       : await _prefs.removeFavoriteRadioStationId(
+    //           event.radioStationId,
+    //         );
+    //   state.pokemonsList
+    //       .firstWhere((pokemon) => pokemon.id == event.radioStationId)
+    //       .isCaptured = event.isCaptured;
+    //   secureEmit(
+    //     state.copyWith(
+    //       status: event.isFavorite
+    //           ? RadioStationStatus.isFavRadioStation
+    //           : RadioStationStatus.isNotFavRadioStation,
+    //     ),
+    //   );
+    // });
   }
 
   ///
