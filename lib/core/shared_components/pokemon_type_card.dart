@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/constants/pokemon_types.dart';
 
+/// Pokemon Type card class
 class PokemonTypeCard extends StatelessWidget {
+  ///
   const PokemonTypeCard(
     this.type, {
     super.key,
     this.large = false,
-    this.colored = false,
   });
 
+  /// type
   final PokemonTypes type;
+
+  /// flag to condition the style in the pokedex list or the details
   final bool large;
-  final bool colored;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +27,7 @@ class PokemonTypeCard extends StatelessWidget {
         ),
         decoration: ShapeDecoration(
           shape: const StadiumBorder(),
-          color:
-              (colored ? type.color : Theme.of(context).colorScheme.background)
-                  .withOpacity(0.3),
+          color: Theme.of(context).colorScheme.background.withOpacity(0.3),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,

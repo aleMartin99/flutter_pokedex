@@ -30,7 +30,7 @@ class ProgressBar extends StatelessWidget {
       alignment: Alignment.centerLeft,
       decoration: ShapeDecoration(
         shape: const StadiumBorder(),
-        color: backgroundColor ?? Theme.of(context).colorScheme.primary,
+        color: Colors.grey,
       ),
       child: enableAnimation
           ? AnimatedAlign(

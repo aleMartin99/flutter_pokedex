@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
+/// Pokeball Loading indicator
 class PokeBallLoadingIndicator extends StatelessWidget {
+  ///
   const PokeBallLoadingIndicator({super.key});
 
+//TODO change the url to class helper
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Image(
         // image: GifConstants.pokeball_loader,
         image: NetworkImage(

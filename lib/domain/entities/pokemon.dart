@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter_pokedex/core/constants/pokemon_types.dart';
+import 'package:flutter_pokedex/core/services/capitalize_first_letter_service.dart';
 import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model.dart';
 import 'package:flutter_pokedex/data/models/pokemon_model/stat.dart';
 
@@ -23,10 +24,17 @@ class Pokemon {
   factory Pokemon.fromModel(PokemonModel pokemonModel) {
     return Pokemon(
       id: pokemonModel.id,
-      name: pokemonModel.name,
+      name: capitalizeFirstLetter(pokemonModel.name!),
       height: pokemonModel.height,
       weight: pokemonModel.weight,
-      stats: pokemonModel.stats,
+      stats: pokemonModel.stats!
+          .map(
+            (e) => Stat(
+              baseStat: e.baseStat,
+              statName: capitalizeFirstLetter(e.statName!),
+            ),
+          )
+          .toList(),
       types:
           pokemonModel.types!.map((e) => PokemonTypes.parse(e.type!)).toList(),
       image: pokemonModel.sprites!.image,

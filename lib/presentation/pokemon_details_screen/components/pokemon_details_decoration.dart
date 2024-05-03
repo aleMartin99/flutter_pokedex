@@ -1,7 +1,11 @@
 part of 'pokemon_details_body.dart';
 
+/// PokemonDetailsDecoration
 class PokemonDetailsDecoration extends StatelessWidget {
-  const PokemonDetailsDecoration();
+  ///
+  const PokemonDetailsDecoration({super.key});
+
+  ///
   static const Size size = Size.square(144);
 
   @override
@@ -75,7 +79,7 @@ class _BackgroundDecorationState extends State<_BackgroundDecoration> {
 
     final pokeSize = screenSize.width * 0.5;
     final appBarHeight = AppBar().preferredSize.height;
-    final iconButtonPadding = AppAppBar.padding.right;
+    const iconButtonPadding = 24;
     final iconSize = IconTheme.of(context).size ?? 0;
 
     final pokeballTopMargin = -(pokeSize / 2 - safeAreaTop - appBarHeight / 2);

@@ -41,22 +41,27 @@ class PokeballScaffold extends Scaffold {
         );
 }
 
+///PositionedPokeball class
 class PositionedPokeball extends StatelessWidget {
-  final double widthFraction;
-  final double maxSize;
-
+  ///
   const PositionedPokeball({
     super.key,
     this.widthFraction = 0.664,
     this.maxSize = 250,
   });
 
+  ///
+  final double widthFraction;
+
+  ///
+  final double maxSize;
+
   @override
   Widget build(BuildContext context) {
     final safeAreaTop = MediaQuery.paddingOf(context).top;
     final pokeballSize =
         min(MediaQuery.sizeOf(context).width * widthFraction, maxSize);
-    final iconButtonPadding = 10;
+    const iconButtonPadding = 20;
     final iconSize = IconTheme.of(context).size ?? 0;
 
     final pokeballTopMargin =
@@ -71,7 +76,7 @@ class PositionedPokeball extends StatelessWidget {
         image: const AssetImage(ImageConstants.pokeball),
         width: pokeballSize,
         height: pokeballSize,
-        color: Colors.black.withOpacity(0.05),
+        color: Theme.of(context).primaryColor.withOpacity(0.2),
       ),
     );
   }

@@ -10,7 +10,7 @@ import 'package:fpdart/fpdart.dart';
 
 part 'pokemon_event.dart';
 part 'pokemon_state.dart';
-part 'radio_station_status.dart';
+part 'pokemon_status.dart';
 
 /// PokemonBloc class
 class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {

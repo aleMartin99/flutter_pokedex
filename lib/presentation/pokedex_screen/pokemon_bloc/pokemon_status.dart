@@ -5,10 +5,6 @@ part of 'pokemon_bloc.dart';
 enum PokemonStatus {
   initial,
   loading,
-  loadingToggleFavorite,
   success,
   failure,
-  sharedRadioStation,
-  isFavRadioStation,
-  isNotFavRadioStation
 }

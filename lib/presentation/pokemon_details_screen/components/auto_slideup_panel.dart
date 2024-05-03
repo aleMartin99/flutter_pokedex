@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+///AutoSlideUpPanel class
 class AutoSlideUpPanel extends StatefulWidget {
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-  final void Function(double)? onPanelSlide;
-
+  ///
   const AutoSlideUpPanel({
-    super.key,
     required this.minHeight,
     required this.maxHeight,
     required this.child,
+    super.key,
     this.onPanelSlide,
   });
+
+  ///
+  final double minHeight;
+
+  ///
+  final double maxHeight;
+
+  ///
+  final Widget child;
+
+  ///
+  final void Function(double)? onPanelSlide;
 
   @override
   State<AutoSlideUpPanel> createState() => _PokemonInfoCardState();

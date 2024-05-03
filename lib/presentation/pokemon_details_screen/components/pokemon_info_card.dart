@@ -6,10 +6,15 @@ import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/p
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_info_card_basestats.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
 
+///PokemonInfoCard
 class PokemonInfoCard extends StatefulWidget {
-  const PokemonInfoCard({required this.pokemon});
+  ///
+  const PokemonInfoCard({required this.pokemon, super.key});
+
+  ///
   static const double minCardHeightFraction = 0.54;
 
+  ///
   final Pokemon pokemon;
   @override
   State<PokemonInfoCard> createState() => _PokemonInfoCardState();
@@ -36,12 +41,12 @@ class _PokemonInfoCardState extends State<PokemonInfoCard> {
         paddingAnimation: slideController,
         tabs: [
           MainTabData(
-            label: 'About',
-            child: PokemonAbout(widget.pokemon),
-          ),
-          MainTabData(
             label: 'Base Stats',
             child: PokemonBaseStats(widget.pokemon),
+          ),
+          MainTabData(
+            label: 'Live Preview',
+            child: PokemonPreview(widget.pokemon),
           ),
         ],
       ),

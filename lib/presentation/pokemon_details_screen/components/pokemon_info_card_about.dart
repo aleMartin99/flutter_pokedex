@@ -1,9 +1,8 @@
 part of 'pokemon_details_body.dart';
 
 class _Label extends StatelessWidget {
-  final String text;
-
   const _Label(this.text);
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +17,12 @@ class _Label extends StatelessWidget {
 }
 
 class _ContentSection extends StatelessWidget {
-  final String label;
-  final List<Widget>? children;
-
   const _ContentSection({
     required this.label,
     this.children,
   });
+  final String label;
+  final List<Widget>? children;
 
   @override
   Widget build(BuildContext context) {
@@ -36,41 +34,23 @@ class _ContentSection extends StatelessWidget {
           style: const TextStyle(height: 0.8, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 22),
-        if (children != null) ...children!
+        if (children != null) ...children!,
       ],
     );
   }
 }
 
-class _TextIcon extends StatelessWidget {
-  final ImageProvider icon;
-  final String text;
-
-  const _TextIcon(this.icon, this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image(image: icon, width: 12, height: 12),
-        const SizedBox(width: 4),
-        Text(text, style: const TextStyle(height: 0.8)),
-      ],
-    );
-  }
-}
-
-class PokemonAbout extends StatelessWidget {
+///PokemonPreview class
+class PokemonPreview extends StatelessWidget {
+  const PokemonPreview(this.pokemon);
   final Pokemon pokemon;
-
-  const PokemonAbout(this.pokemon);
 
   @override
   Widget build(BuildContext context) {
     final slideController =
         PokemonInfoStateProvider.of(context).slideController;
+    final screenSize = MediaQuery.sizeOf(context);
+    final pokemonPreviewSize = screenSize.height * 0.25;
 
     return AnimatedBuilder(
       animation: slideController,
@@ -88,57 +68,18 @@ class PokemonAbout extends StatelessWidget {
       child: Column(
         children: <Widget>[
           const SizedBox(height: 28),
-          _buildHeightWeight(pokemon.height ?? 0, pokemon.weight ?? 0, context),
-          const SizedBox(height: 31),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDescription(String description) {
-    return Text(
-      description,
-      style: const TextStyle(height: 1.3),
-    );
-  }
-
-  Widget _buildHeightWeight(int height, int weight, BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Theme.of(context).colorScheme.background,
-        // boxShadow: context.styles.cardShadow,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const _Label('Height'),
-                const SizedBox(height: 11),
-                Text(
-                  height.toString(),
-                  style: const TextStyle(
-                    height: 0.8,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const _Label('Weight'),
-                const SizedBox(height: 11),
-                Text(weight.toString(),
-                    style: const TextStyle(
-                      height: 0.8,
-                    ))
-              ],
+          CachedNetworkImage(
+            imageUrl: pokemon.livePreview!,
+            useOldImageOnUrlChange: true,
+            fadeInDuration: const Duration(milliseconds: 120),
+            fadeOutDuration: const Duration(milliseconds: 120),
+            imageBuilder: (_, image) => Image(
+              image: image,
+              filterQuality: FilterQuality.none,
+              width: pokemonPreviewSize,
+              height: pokemonPreviewSize,
+              alignment: Alignment.bottomCenter,
+              fit: BoxFit.contain,
             ),
           ),
         ],

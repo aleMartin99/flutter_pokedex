@@ -4,15 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
-import 'package:flutter_pokedex/core/shared_components/app_bar.dart';
 import 'package:flutter_pokedex/core/shared_components/loading.dart';
-import 'package:flutter_pokedex/core/shared_components/pokemon_refresh_control.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_card.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/components/search_modal.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 
+/// PokemonGrid class
 class PokemonGrid extends StatefulWidget {
-  const PokemonGrid();
+  ///
+  const PokemonGrid({super.key});
 
   @override
   State<PokemonGrid> createState() => _PokemonGridState();
@@ -29,7 +30,6 @@ class _PokemonGridState extends State<PokemonGrid> {
 
     scheduleMicrotask(() {
       context.read<PokemonBloc>().add(OnLoadPokemonsEvent());
-      // pokemonBloc.add(const PokemonLoadStarted());
       _scrollKey.currentState?.innerController.addListener(_onScroll);
     });
   }
@@ -57,15 +57,7 @@ class _PokemonGridState extends State<PokemonGrid> {
     }
   }
 
-  Future _onRefresh() async {
-    // pokemonBloc.add(const PokemonLoadStarted());
-
-    // return pokemonBloc.stream
-    //     .firstWhere((e) => e.status != PokemonStateStatus.loading);
-  }
-
   Future<void> _onPokemonPress(Pokemon pokemon) async {
-    // pokemonBloc.add(PokemonSelectChanged(pokemonId: pokemon.number));
     await Navigator.pushNamed(
       context,
       AppRoutes.pokemonDetailsScreenRoute,
@@ -73,90 +65,112 @@ class _PokemonGridState extends State<PokemonGrid> {
         pokemon,
       ),
     );
-    // context.router.push(PokemonInfoRoute(id: pokemon.number));
   }
+
+  void _showSearchModal() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const SearchBottomModal(),
+    );
+  }
+
+// onPress: () => onPress(_showSearchModal),
 
   @override
   Widget build(BuildContext context) {
-    return NestedScrollView(
+    //todo put fixxed search bar and title
+    return Column(
       key: _scrollKey,
-      headerSliverBuilder: (_, __) => [
-        AppMovingTitleSliverAppBar(
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 10),
+      children: [
+        //TODO add back button
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.06,
+        ),
+        Align(
+          alignment: Alignment.topRight,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 7),
             child: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(CupertinoIcons.left_chevron),
+              onPressed: _showSearchModal,
+              icon: const Icon(CupertinoIcons.search),
             ),
           ),
         ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Pokedex',
+              textAlign: TextAlign.start,
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+        ),
+        _buildGrid(),
       ],
-      body: _buildGrid(),
     );
   }
 
   Widget _buildGrid() {
     return BlocBuilder<PokemonBloc, PokemonState>(
       builder: (context, pokemonState) {
-        return CustomScrollView(
-          slivers: [
-            PokemonRefreshControl(onRefresh: _onRefresh),
-            SliverPadding(
-              padding: const EdgeInsets.all(28),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1.4,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                delegate: SliverChildBuilderDelegate(
-                  (_, index) {
-                    return PokemonCard(
-                      pokemonState.pokemonsList[index],
-                      onPress: () =>
-                          _onPokemonPress(pokemonState.pokemonsList[index]),
-                    );
-                  },
-                  childCount: pokemonState.pokemonsList.length,
-                ),
-              ),
-            ),
-            //           SliverToBoxAdapter(
-            //               child:
-            //                   // PokemonCanLoadMoreSelector((canLoadMore) {
-            //                   //   if (!canLoadMore) {
-            //                   //     return const SizedBox.shrink();
-            //                   //   }
-            // // (pokemonState.status == PokemonStatus.loading) {                    return const SizedBox.shrink()}
-            //                   Container(
-            //             padding: const EdgeInsets.only(bottom: 28),
-            //             child: const PokeBallLoadingIndicator(),
-            //           )
-            //               // }),
-            //               ),
-          ],
-        );
+        return pokemonState.status == PokemonStatus.loading
+            ? Column(
+                children: [
+                  SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.34,
+                  ),
+                  const Center(
+                    child:
+                        SizedBox(height: 80, child: PokeBallLoadingIndicator()),
+                  ),
+                ],
+              )
+            : pokemonState.status == PokemonStatus.success
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: GridView.count(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 25,
+                      ),
+                      physics: const BouncingScrollPhysics(),
+                      childAspectRatio: 1.2,
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 15,
+                      mainAxisSpacing: 12,
+                      children: List.generate(
+                        pokemonState.pokemonsList.length,
+                        (index) => PokemonCard(
+                          pokemonState.pokemonsList[index],
+                          onPress: () => _onPokemonPress(
+                            pokemonState.pokemonsList[index],
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                : _buildError();
       },
     );
   }
 
   Widget _buildError() {
-    return CustomScrollView(
-      slivers: [
-        PokemonRefreshControl(onRefresh: _onRefresh),
-        SliverFillRemaining(
-          child: Container(
-            padding: const EdgeInsets.only(bottom: 28),
-            alignment: Alignment.center,
-            child: const Icon(
-              Icons.warning_amber_rounded,
-              size: 60,
-              color: Colors.black26,
-            ),
-          ),
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.only(bottom: 28),
+        alignment: Alignment.center,
+        child: const Icon(
+          Icons.warning_amber_rounded,
+          size: 60,
+          color: Colors.black26,
         ),
-      ],
+      ),
     );
   }
 }

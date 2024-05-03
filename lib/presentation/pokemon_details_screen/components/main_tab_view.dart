@@ -1,39 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/theme/colors.dart';
 
+///Main tab data class
 class MainTabData {
-  final Widget child;
-  final String label;
-
   const MainTabData({
     required this.label,
     required this.child,
   });
+
+  ///
+  final Widget child;
+
+  ///
+  final String label;
 }
 
+///
 class MainTabView extends StatelessWidget {
-  final List<MainTabData> tabs;
-  final Animation<double>? paddingAnimation;
-
+  ///
   const MainTabView({
-    super.key,
     required this.tabs,
+    super.key,
     this.paddingAnimation,
   });
+
+  ///Tabs
+  final List<MainTabData> tabs;
+
+  ///padding animation
+  final Animation<double>? paddingAnimation;
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: tabs.length,
-      initialIndex: 0,
       child: Container(
         width: MediaQuery.sizeOf(context).width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             _buildTopAnimatedPadding(),
@@ -58,11 +65,11 @@ class MainTabView extends StatelessWidget {
     );
   }
 
+//TODO put primary dynamic color
   Widget _buildTabBar() {
     return TabBar(
       labelPadding: const EdgeInsets.symmetric(vertical: 16),
       indicatorSize: TabBarIndicatorSize.label,
-      indicatorWeight: 2,
       indicatorColor: AppColors.indigo,
       tabs: tabs.map((tab) => Text(tab.label)).toList(),
     );

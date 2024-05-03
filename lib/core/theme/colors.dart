@@ -31,3 +31,24 @@ class AppColors {
   static const Color violet = Color(0xD07038F8);
   static const Color orange = Color(0xFFFF9D5C);
 }
+//TODO veriofy colors in api
+
+//  static Color primary = const Color(0xFFDC0A2D);
+//   static Color bug = const Color(0xFFA7B723);
+//   static Color dark = const Color(0xFF75574C);
+//   static Color dragon = const Color(0xFF7037FF);
+//   static Color electric = const Color(0xFFF9CF30);
+//   static Color fairy = const Color(0xFFE69EAC);
+//   static Color fighting = const Color(0xFFC12239);
+//   static Color fire = const Color(0xFFF57D31);
+//   static Color flying = const Color(0xFFA891EC);
+//   static Color ghost = const Color(0xFF70559B);
+//   static Color normal = const Color(0xFFAAA67F);
+//   static Color grass = const Color(0xFF74CB48);
+//   static Color ground = const Color(0xFFDEC16B);
+//   static Color ice = const Color(0xFF9AD6DF);
+//   static Color poison = const Color(0xFFA43E9E);
+//   static Color psychic = const Color(0xFFFB5584);
+//   static Color rock = const Color(0xFFB69E31);
+//   static Color steel = const Color(0xFFB7B9D0);
+//   static Color water = const Color(0xFF6493EB);

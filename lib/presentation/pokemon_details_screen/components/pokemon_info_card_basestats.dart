@@ -3,42 +3,48 @@ import 'package:flutter_pokedex/core/theme/colors.dart';
 import 'package:flutter_pokedex/data/models/pokemon_model/stat.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/progress.dart';
-// import 'package:flutter_pokedex/data/models/pokemon_model/stat.dart' as stats;
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
 
+///StatWidget class
 class StatWidget extends StatelessWidget {
-  final Animation animation;
-  final String label;
-  final double? progress;
-  final num value;
-
   const StatWidget({
-    super.key,
     required this.animation,
     required this.label,
     required this.value,
+    super.key,
     this.progress,
   });
+
+  ///
+  final Animation<double> animation;
+
+  ///
+  final String label;
+
+  ///
+  final double? progress;
+
+  ///
+  final num value;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         Expanded(
           flex: 2,
           child: Text(
             label,
             style: TextStyle(
-                color: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .color!
-                    .withOpacity(0.6)),
+              color: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .color!
+                  .withOpacity(0.6),
+            ),
           ),
         ),
         Expanded(
-          flex: 1,
           child: Text('$value'),
         ),
         Expanded(
@@ -51,7 +57,7 @@ class StatWidget extends StatelessWidget {
               return ProgressBar(
                 //TODO poner colores en dependencia de primary color
                 progress: animation.value * currentProgress as double,
-                color: currentProgress < 0.5 ? AppColors.red : AppColors.teal,
+                color: Theme.of(context).primaryColor,
                 enableAnimation: animation.value == 1,
               );
             },
@@ -62,10 +68,13 @@ class StatWidget extends StatelessWidget {
   }
 }
 
+/// PokemonBaseStats class
 class PokemonBaseStats extends StatefulWidget {
-  final Pokemon pokemon;
+  ///
+  const PokemonBaseStats(this.pokemon, {super.key});
 
-  const PokemonBaseStats(this.pokemon);
+  ///
+  final Pokemon pokemon;
 
   @override
   State<PokemonBaseStats> createState() => _PokemonBaseStatsState();
@@ -88,11 +97,12 @@ class _PokemonBaseStatsState extends State<PokemonBaseStats>
       duration: const Duration(milliseconds: 400),
     );
 
-    _progressAnimation =
-        Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-      curve: Curves.easeInOut,
-      parent: _progressController,
-    ));
+    _progressAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
+        curve: Curves.easeInOut,
+        parent: _progressController,
+      ),
+    );
 
     _progressController.forward();
 
@@ -123,7 +133,6 @@ class _PokemonBaseStatsState extends State<PokemonBaseStats>
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           buildStats(pokemon.stats),
           const SizedBox(height: 27),
