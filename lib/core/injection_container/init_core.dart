@@ -7,6 +7,7 @@ import 'package:flutter_pokedex/data/repositories/pokemon_repository.dart';
 import 'package:flutter_pokedex/domain/repositories/ipokemon_repository.dart';
 import 'package:flutter_pokedex/domain/usecases/get_pokemons/get_pokemons_usecase.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 //Favors Dependency inversion and single responsibility principles
@@ -31,5 +32,8 @@ FutureOr<void> initCore(GetIt sl) async {
       () => PokemonBloc(
         getPokemonsUsecase: sl<GetPokemonsUsecase>(),
       ),
+    )
+    ..registerLazySingleton<SearchBloc>(
+      () => SearchBloc(),
     );
 }

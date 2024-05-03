@@ -6,9 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/core/shared_components/loading.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/presentation/pokedex_screen/components/input.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_card.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/components/search_field.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
 
 /// PokemonGrid class
 class PokemonGrid extends StatefulWidget {
@@ -36,6 +37,7 @@ class _PokemonGridState extends State<PokemonGrid> {
 
   @override
   void dispose() {
+    //TODO add el search event deactivate
     _scrollKey.currentState?.innerController.dispose();
     _scrollKey.currentState?.dispose();
 
@@ -69,7 +71,6 @@ class _PokemonGridState extends State<PokemonGrid> {
 
   @override
   Widget build(BuildContext context) {
-    //todo put fixxed search bar and title
     return Column(
       key: _scrollKey,
       children: [
@@ -100,11 +101,9 @@ class _PokemonGridState extends State<PokemonGrid> {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(20),
-          child: AppSearchBar(
-            hintText: 'Search a pokemon',
-          ),
+        const Padding(
+          padding: EdgeInsets.all(20),
+          child: SearchField(),
         ),
         _buildGrid(),
       ],
@@ -112,45 +111,96 @@ class _PokemonGridState extends State<PokemonGrid> {
   }
 
   Widget _buildGrid() {
-    return BlocBuilder<PokemonBloc, PokemonState>(
-      builder: (context, pokemonState) {
-        return pokemonState.status == PokemonStatus.loading
-            ? Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.34,
-                  ),
-                  const Center(
-                    child:
-                        SizedBox(height: 80, child: PokeBallLoadingIndicator()),
-                  ),
-                ],
-              )
-            : pokemonState.status == PokemonStatus.success
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: GridView.count(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 25,
+    return BlocBuilder<SearchBloc, SearchState>(
+      builder: (context, searchState) {
+        return BlocBuilder<PokemonBloc, PokemonState>(
+          builder: (context, pokemonState) {
+            return pokemonState.status == PokemonStatus.loading
+                ? Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.sizeOf(context).height * 0.34,
                       ),
-                      physics: const BouncingScrollPhysics(),
-                      childAspectRatio: 1.2,
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 15,
-                      mainAxisSpacing: 12,
-                      children: List.generate(
-                        pokemonState.pokemonsList.length,
-                        (index) => PokemonCard(
-                          pokemonState.pokemonsList[index],
-                          onPress: () => _onPokemonPress(
-                            pokemonState.pokemonsList[index],
-                          ),
+                      const Center(
+                        child: SizedBox(
+                          height: 80,
+                          child: PokeBallLoadingIndicator(),
                         ),
                       ),
-                    ),
+                    ],
                   )
-                : _buildError();
+                : pokemonState.status == PokemonStatus.success
+                    ? searchState.isSearching
+                        ? pokemonState.pokemonsList
+                                .where(
+                                  (pokemon) => pokemon.name!
+                                      .toLowerCase()
+                                      .contains(searchState.searchWord),
+                                )
+                                .isEmpty
+                            ? const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 50),
+                                child: Text(
+                                  'No results found',
+                                  textAlign: TextAlign.center,
+                                ),
+                              )
+                            : Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: GridView.count(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 25,
+                                  ),
+                                  physics: const BouncingScrollPhysics(),
+                                  childAspectRatio: 1.2,
+                                  shrinkWrap: true,
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 15,
+                                  mainAxisSpacing: 12,
+                                  children: pokemonState.pokemonsList
+                                      .where(
+                                        (pokemon) => pokemon.name!
+                                            .toLowerCase()
+                                            .contains(searchState.searchWord),
+                                      )
+                                      .map(
+                                        (pokemon) => PokemonCard(
+                                          pokemon,
+                                          onPress: () => _onPokemonPress(
+                                            pokemon,
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                              )
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: GridView.count(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 25,
+                              ),
+                              physics: const BouncingScrollPhysics(),
+                              childAspectRatio: 1.2,
+                              shrinkWrap: true,
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 15,
+                              mainAxisSpacing: 12,
+                              children: List.generate(
+                                pokemonState.pokemonsList.length,
+                                (index) => PokemonCard(
+                                  pokemonState.pokemonsList[index],
+                                  onPress: () => _onPokemonPress(
+                                    pokemonState.pokemonsList[index],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                    : _buildError();
+          },
+        );
       },
     );
   }

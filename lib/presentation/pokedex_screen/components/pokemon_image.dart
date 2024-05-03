@@ -3,7 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/constants/image_constants.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 
+///Pokemon image class
 class PokemonImage extends StatelessWidget {
+  const PokemonImage({
+    required this.pokemon,
+    required this.size,
+    super.key,
+    this.padding = EdgeInsets.zero,
+    this.useHero = true,
+    this.placeholder,
+    this.tintColor,
+  });
   static const Size _cacheMaxSize = Size(700, 700);
 
   final Pokemon pokemon;
@@ -12,16 +22,6 @@ class PokemonImage extends StatelessWidget {
   final Size size;
   final ImageProvider? placeholder;
   final Color? tintColor;
-
-  const PokemonImage({
-    super.key,
-    required this.pokemon,
-    required this.size,
-    this.padding = EdgeInsets.zero,
-    this.useHero = true,
-    this.placeholder,
-    this.tintColor,
-  });
 
   @override
   Widget build(BuildContext context) {

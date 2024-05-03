@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/main.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 /// Base class for the application
@@ -30,6 +31,9 @@ class _AppState extends State<App> with WidgetsBindingObserver {
           providers: [
             BlocProvider(
               create: (context) => sl<PokemonBloc>(),
+            ),
+            BlocProvider(
+              create: (context) => sl<SearchBloc>(),
             ),
           ],
           child: MaterialApp(

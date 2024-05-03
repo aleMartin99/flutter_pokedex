@@ -13,6 +13,8 @@ class PokedexBody extends StatefulWidget {
 }
 
 class _PokedexBodyState extends State<PokedexBody> {
+//TODO add to dispose el search bloc
+
   @override
   Widget build(BuildContext context) {
     return PokeballScaffold(
