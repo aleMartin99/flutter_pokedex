@@ -42,7 +42,10 @@ class _ContentSection extends StatelessWidget {
 
 ///PokemonPreview class
 class PokemonPreview extends StatelessWidget {
-  const PokemonPreview(this.pokemon);
+  ///
+  const PokemonPreview(this.pokemon, {super.key});
+
+  ///
   final Pokemon pokemon;
 
   @override

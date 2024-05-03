@@ -6,8 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/core/shared_components/loading.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/components/input.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_card.dart';
-import 'package:flutter_pokedex/presentation/pokedex_screen/components/search_modal.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 
 /// PokemonGrid class
@@ -67,33 +67,22 @@ class _PokemonGridState extends State<PokemonGrid> {
     );
   }
 
-  void _showSearchModal() {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => const SearchBottomModal(),
-    );
-  }
-
-// onPress: () => onPress(_showSearchModal),
-
   @override
   Widget build(BuildContext context) {
     //todo put fixxed search bar and title
     return Column(
       key: _scrollKey,
       children: [
-        //TODO add back button
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.06,
         ),
         Align(
-          alignment: Alignment.topRight,
+          alignment: Alignment.topLeft,
           child: Padding(
-            padding: const EdgeInsets.only(right: 7),
+            padding: const EdgeInsets.only(left: 7),
             child: IconButton(
-              onPressed: _showSearchModal,
-              icon: const Icon(CupertinoIcons.search),
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(CupertinoIcons.left_chevron),
             ),
           ),
         ),
@@ -109,6 +98,12 @@ class _PokemonGridState extends State<PokemonGrid> {
                 fontWeight: FontWeight.w900,
               ),
             ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: AppSearchBar(
+            hintText: 'Search a pokemon',
           ),
         ),
         _buildGrid(),

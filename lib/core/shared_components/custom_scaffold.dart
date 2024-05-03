@@ -3,7 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/constants/image_constants.dart';
 
+/// Pokeball custom scaffold
 class PokeballScaffold extends Scaffold {
+  ///
   PokeballScaffold({
     super.key,
     super.appBar,

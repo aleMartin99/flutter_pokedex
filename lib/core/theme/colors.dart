@@ -52,3 +52,21 @@ class AppColors {
 //   static Color rock = const Color(0xFFB69E31);
 //   static Color steel = const Color(0xFFB7B9D0);
 //   static Color water = const Color(0xFF6493EB);
+
+
+
+// inputDecorationTheme: InputDecorationTheme(
+//           contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 42),
+//           filled: true,
+//           fillColor: colors.backgroundDark,
+//           hintStyle: typographies.bodySmall.copyWith(
+//             fontWeight: FontWeight.w500,
+//             color: colors.text.withOpacity(0.4),
+//           ),
+//           border: OutlineInputBorder(
+//             borderRadius: BorderRadius.circular(100),
+//             borderSide: BorderSide.none,
+//           ),
+//           prefixIconColor: colors.text,
+//           suffixIconColor: colors.text,
+//         ),

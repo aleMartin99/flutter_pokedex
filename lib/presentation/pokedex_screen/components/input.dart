@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppSearchBar extends TextFormField {
@@ -71,7 +72,19 @@ class AppSearchBar extends TextFormField {
   }) : super(
           decoration: decoration.copyWith(
             hintText: hintText,
-            prefixIcon: const Icon(Icons.search, size: 26),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(100),
+              borderSide: BorderSide.none,
+            ),
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8, horizontal: 42),
+            filled: true,
+            fillColor: const Color.fromARGB(186, 226, 227, 230),
+            hintStyle: TextStyle(
+              fontWeight: FontWeight.w500,
+              color: Colors.black.withOpacity(0.4),
+            ),
+            prefixIcon: const Icon(CupertinoIcons.search, size: 26),
           ),
         );
 }
