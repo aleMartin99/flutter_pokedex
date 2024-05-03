@@ -278,6 +278,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "sliding_up_panel",
+      "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/sliding_up_panel-2.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sliver_tools",
       "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/sliver_tools-0.2.12",
       "packageUri": "lib/",
@@ -404,7 +410,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-02T19:28:22.755557Z",
+  "generated": "2024-05-03T01:51:38.210276Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }

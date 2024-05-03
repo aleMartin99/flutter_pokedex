@@ -64,7 +64,7 @@ class _PokemonGridState extends State<PokemonGrid> {
     //     .firstWhere((e) => e.status != PokemonStateStatus.loading);
   }
 
-  void _onPokemonPress(Pokemon pokemon) async {
+  Future<void> _onPokemonPress(Pokemon pokemon) async {
     // pokemonBloc.add(PokemonSelectChanged(pokemonId: pokemon.number));
     await Navigator.pushNamed(
       context,
@@ -82,51 +82,18 @@ class _PokemonGridState extends State<PokemonGrid> {
       key: _scrollKey,
       headerSliverBuilder: (_, __) => [
         AppMovingTitleSliverAppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(CupertinoIcons.left_chevron),
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: IconButton(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(CupertinoIcons.left_chevron),
+            ),
           ),
         ),
       ],
       body: _buildGrid(),
-      // PokemonStateStatusSelector((status) {
-      //   switch (status) {
-      //     case PokemonStateStatus.initial:
-      //     case PokemonStateStatus.loading:
-      //       return const PikaLoadingIndicator();
-
-      //     case PokemonStateStatus.success:
-      //     case PokemonStateStatus.loadingMore:
-      //       return _buildGrid();
-
-      //     case PokemonStateStatus.failure:
-      //       return _buildError();
-      //   }
-      // }),
     );
   }
-
-// GridView.count(
-//                                       padding: const EdgeInsets.symmetric(
-//                                           vertical: 25),
-//                                       clipBehavior: Clip.hardEdge,
-//                                       physics: const BouncingScrollPhysics(),
-//                                       childAspectRatio: 0.65,
-//                                       shrinkWrap: true,
-//                                       crossAxisCount: 2,
-//                                       crossAxisSpacing: 15,
-//                                       mainAxisSpacing: 12,
-//                                       children: state.productList
-//                                           .where((product) => product.title!
-//                                               .toLowerCase()
-//                                               .contains(_prefs.searchText
-//                                                   .toLowerCase()))
-//                                           .map(
-//                                             (product) =>
-//                                                 ProductWidget(product: product),
-//                                           )
-//                                           .toList(),
-//                                     )
 
   Widget _buildGrid() {
     return BlocBuilder<PokemonBloc, PokemonState>(

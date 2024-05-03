@@ -8,4 +8,10 @@ class ImageConstants {
 
   /// charmander image path
   static const String charmander = '${basePath}charmander.png';
+
+  /// captured Icon path
+  static const String capturedIcon = '${basePath}captured_icon.png';
+
+  /// not captured Icon path
+  static const String notCapturedIcon = '${basePath}not_captured_icon.png';
 }

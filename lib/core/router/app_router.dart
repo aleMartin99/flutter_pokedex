@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/home_screen/home_screen_exports.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokedex_screen_exports.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/pokemon_details_screen.dart';
 
 /// key to compare home screen route
 const String homeScreenRoute = '/home';
@@ -14,7 +15,6 @@ const String pokemonDetailsScreenRoute = '/pokemonDetails';
 /// key to compare pokedex screen route
 const String pokedexScreenRoute = '/pokedex';
 
-//TODO add splash lottie pickachu running animation
 class AppRouter extends StatelessWidget {
   const AppRouter({super.key});
 
@@ -32,16 +32,16 @@ class AppRouter extends StatelessWidget {
           builder: (_) => const PokedexScreen(),
         );
 
-      // case pokemonDetailsScreenRoute:
-      //   if (args is PokemonDetailsArguments) {
-      //     return MaterialPageRoute(
-      //       builder: (_) => PokemonDetailsScreen(
-      //         pokemon: args.pokemon,
-      //       ),
-      //     );
-      //   } else {
-      //     return _errorRoute();
-      //   }
+      case pokemonDetailsScreenRoute:
+        if (args is PokemonDetailsArguments) {
+          return MaterialPageRoute(
+            builder: (_) => PokemonDetailsScreen(
+              pokemon: args.pokemon,
+            ),
+          );
+        } else {
+          return _errorRoute();
+        }
 
 //TODO change to splash
       default:

@@ -4,18 +4,19 @@ import 'package:flutter_pokedex/core/shared_components/pokemon_type_card.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_image.dart';
 
+/// PokemonCard class
 class PokemonCard extends StatelessWidget {
-  static const double _pokeballFraction = 0.75;
-  static const double _pokemonFraction = 0.76;
-
-  final Pokemon pokemon;
-  final void Function()? onPress;
-
+  ///
   const PokemonCard(
     this.pokemon, {
     super.key,
     this.onPress,
   });
+  static const double _pokeballFraction = 0.75;
+  static const double _pokemonFraction = 0.76;
+
+  final Pokemon pokemon;
+  final void Function()? onPress;
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +105,8 @@ class PokemonCard extends StatelessWidget {
 }
 
 class _CardContent extends StatelessWidget {
-  final Pokemon pokemon;
-
   const _CardContent(this.pokemon);
+  final Pokemon pokemon;
 
   @override
   Widget build(BuildContext context) {
