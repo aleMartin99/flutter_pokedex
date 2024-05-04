@@ -20,6 +20,7 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody> {
   @override
   void initState() {
+    context.read<PokemonBloc>().add(OnLoadPokemonsEvent());
     context.read<PokemonBloc>().add(OnLoadCapturedPokemonsEvent());
     super.initState();
   }

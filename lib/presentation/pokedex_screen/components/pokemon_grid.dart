@@ -118,7 +118,7 @@ class _PokemonGridState extends State<PokemonGrid> {
                 ? Column(
                     children: [
                       SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.34,
+                        height: MediaQuery.sizeOf(context).height * 0.28,
                       ),
                       const Center(
                         child: SizedBox(
@@ -208,7 +208,7 @@ class _PokemonGridState extends State<PokemonGrid> {
     return Column(
       children: [
         SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.33,
+          height: MediaQuery.sizeOf(context).height * 0.28,
         ),
         Container(
           padding: const EdgeInsets.only(bottom: 28),

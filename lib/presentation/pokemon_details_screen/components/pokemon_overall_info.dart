@@ -126,19 +126,21 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
               builder: (context, state) {
                 return Image(
                   image: AssetImage(
-                    state.pokemonsList
-                            .firstWhere(
-                              (element) => element.id == widget.pokemon.id,
-                            )
-                            .isCaptured
+                    state.pokemonsList.isNotEmpty &&
+                            state.pokemonsList
+                                .firstWhere(
+                                  (element) => element.id == widget.pokemon.id,
+                                )
+                                .isCaptured
                         ? ImageConstants.capturedIcon
                         : ImageConstants.notCapturedIcon,
                   ),
-                  height: state.pokemonsList
-                          .firstWhere(
-                            (element) => element.id == widget.pokemon.id,
-                          )
-                          .isCaptured
+                  height: state.pokemonsList.isNotEmpty &&
+                          state.pokemonsList
+                              .firstWhere(
+                                (element) => element.id == widget.pokemon.id,
+                              )
+                              .isCaptured
                       ? 30
                       : 26,
                 );

@@ -80,7 +80,8 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
                   )
                   .isCaptured = event.isCaptured,
               state.capturedPokemonsList.removeWhere(
-                  (element) => element.id == event.capturedPokemon.id)
+                (element) => element.id == event.capturedPokemon.id,
+              ),
             };
 
       secureEmit(
