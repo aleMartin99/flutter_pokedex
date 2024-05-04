@@ -1,7 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_pokedex/core/services/pokemon_entity_to_db_adapter.dart';
+import 'package:flutter_pokedex/core/services/pokemon_entity_to_db_adapter_service.dart';
 import 'package:flutter_pokedex/data/adapters/isar_pokemon.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:isar/isar.dart';

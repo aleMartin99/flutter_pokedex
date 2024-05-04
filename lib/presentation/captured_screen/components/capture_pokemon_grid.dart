@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
+import 'package:flutter_pokedex/core/services/order_alphabetically_service.dart';
 import 'package:flutter_pokedex/core/shared_components/loading.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
+import 'package:flutter_pokedex/presentation/captured_screen/filter_bloc/filter_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_card.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
@@ -42,98 +44,140 @@ class _CapturedPokemonGridState extends State<CapturedPokemonGrid> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.06,
-        ),
-        Align(
-          alignment: Alignment.topLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 7),
-            child: IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(CupertinoIcons.left_chevron),
+    return BlocBuilder<FilterBloc, FilterState>(
+      builder: (context, filterState) {
+        return Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height * 0.06,
             ),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Captured',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w900,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 7),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () => Navigator.pop(context),
+                    icon: const Icon(CupertinoIcons.left_chevron),
+                  ),
+                  IconButton(
+                    onPressed: () => context.read<FilterBloc>().add(
+                          OnToggleAlphabeticallyFilterEvent(
+                            isFilteringByAlphabetically:
+                                !filterState.isFilteringByAlphabetically,
+                          ),
+                        ),
+                    icon: Icon(
+                      Icons.filter_alt,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ),
-        _buildGrid(),
-      ],
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Captured',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ),
+            ),
+            _buildGrid(),
+          ],
+        );
+      },
     );
   }
 
   Widget _buildGrid() {
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (context, searchState) {
-        return BlocBuilder<PokemonBloc, PokemonState>(
-          builder: (context, pokemonState) {
-            return pokemonState.status == PokemonStatus.loadingToggleCaptured ||
-                    pokemonState.status == PokemonStatus.loading
-                ? Column(
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.34,
-                      ),
-                      const Center(
-                        child: SizedBox(
-                          height: 80,
-                          child: PokeBallLoadingIndicator(),
-                        ),
-                      ),
-                    ],
-                  )
-                : pokemonState.capturedPokemonsList.isNotEmpty
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: GridView.count(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 25,
-                          ),
-                          physics: const BouncingScrollPhysics(),
-                          childAspectRatio: 1.2,
-                          shrinkWrap: true,
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 15,
-                          mainAxisSpacing: 12,
-                          children: List.generate(
-                            pokemonState.capturedPokemonsList.length,
-                            (index) => PokemonCard(
-                              pokemonState.capturedPokemonsList[index],
-                              onPress: () => _onPokemonPress(
-                                pokemonState.capturedPokemonsList[index],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    : Column(
+        return BlocBuilder<FilterBloc, FilterState>(
+          builder: (context, filterState) {
+            return BlocBuilder<PokemonBloc, PokemonState>(
+              builder: (context, pokemonState) {
+                return pokemonState.status ==
+                            PokemonStatus.loadingToggleCaptured ||
+                        pokemonState.status == PokemonStatus.loading
+                    ? Column(
                         children: [
                           SizedBox(
                             height: MediaQuery.sizeOf(context).height * 0.34,
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 50),
-                            child: Text(
-                              'Your journey is just starting ;)',
-                              textAlign: TextAlign.center,
+                          const Center(
+                            child: SizedBox(
+                              height: 80,
+                              child: PokeBallLoadingIndicator(),
                             ),
                           ),
                         ],
-                      );
+                      )
+                    : pokemonState.capturedPokemonsList.isNotEmpty
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: GridView.count(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 25,
+                              ),
+                              physics: const BouncingScrollPhysics(),
+                              childAspectRatio: 1.2,
+                              shrinkWrap: true,
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 15,
+                              mainAxisSpacing: 12,
+                              children: (filterState
+                                      .isFilteringByAlphabetically)
+                                  ? List.generate(
+                                      orderAlphabetically(
+                                        pokemonState.capturedPokemonsList,
+                                      ).length,
+                                      (index) => PokemonCard(
+                                        orderAlphabetically(
+                                          pokemonState.capturedPokemonsList,
+                                        )[index],
+                                        onPress: () => _onPokemonPress(
+                                          pokemonState
+                                              .capturedPokemonsList[index],
+                                        ),
+                                      ),
+                                    )
+                                  : List.generate(
+                                      pokemonState.capturedPokemonsList.length,
+                                      (index) => PokemonCard(
+                                        pokemonState
+                                            .capturedPokemonsList[index],
+                                        onPress: () => _onPokemonPress(
+                                          pokemonState
+                                              .capturedPokemonsList[index],
+                                        ),
+                                      ),
+                                    ),
+                            ),
+                          )
+                        : Column(
+                            children: [
+                              SizedBox(
+                                height:
+                                    MediaQuery.sizeOf(context).height * 0.34,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 50),
+                                child: Text(
+                                  'Your journey is just starting ;)',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          );
+              },
+            );
           },
         );
       },

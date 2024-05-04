@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 import 'package:flutter_pokedex/data/adapters/isar_pokemon.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 

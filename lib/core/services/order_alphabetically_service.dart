@@ -1,0 +1,8 @@
+import 'package:flutter_pokedex/domain/entities/pokemon.dart';
+
+List<Pokemon> orderAlphabetically(List<Pokemon> pokemonList) {
+  final orderedPokemonsList = <Pokemon>[];
+  orderedPokemonsList.addAll(pokemonList);
+  orderedPokemonsList.sort((a, b) => a.name!.compareTo(b.name!));
+  return orderedPokemonsList;
+}

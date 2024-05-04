@@ -7,6 +7,7 @@ import 'package:flutter_pokedex/data/datasources/remote_datasource/pokemon_datas
 import 'package:flutter_pokedex/data/repositories/pokemon_repository.dart';
 import 'package:flutter_pokedex/domain/repositories/ipokemon_repository.dart';
 import 'package:flutter_pokedex/domain/usecases/get_pokemons/get_pokemons_usecase.dart';
+import 'package:flutter_pokedex/presentation/captured_screen/filter_bloc/filter_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -36,6 +37,9 @@ FutureOr<void> initCore(GetIt sl) async {
     )
     ..registerLazySingleton<SearchBloc>(
       () => SearchBloc(),
+    )
+    ..registerLazySingleton<FilterBloc>(
+      () => FilterBloc(),
     )
     ..registerLazySingleton<IsarHelper>(
       () => IsarHelper(),
