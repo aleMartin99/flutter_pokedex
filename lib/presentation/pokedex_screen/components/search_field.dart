@@ -32,7 +32,6 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: SizeConfig.screenWidth * 0.6,
       decoration: BoxDecoration(
         color: const Color.fromARGB(186, 226, 227, 230),
         borderRadius: BorderRadius.circular(15),
@@ -54,6 +53,7 @@ class _SearchFieldState extends State<SearchField> {
           focusedBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           hintText: 'Search a pokemon',
+          hintStyle: TextStyle(fontSize: 14, color: Colors.grey),
           prefixIcon: Icon(Icons.search),
         ),
       ),

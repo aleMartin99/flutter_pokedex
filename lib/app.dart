@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
+import 'package:flutter_pokedex/core/theme/colors.dart';
+import 'package:flutter_pokedex/core/theme/theme.dart';
 import 'package:flutter_pokedex/main.dart';
 import 'package:flutter_pokedex/presentation/captured_screen/filter_bloc/filter_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 
 /// Base class for the application
 
@@ -25,29 +26,25 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-    //initialize responsive sizer package
-    return ResponsiveSizer(
-      builder: (context, orientation, screenType) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (context) => sl<PokemonBloc>(),
-            ),
-            BlocProvider(
-              create: (context) => sl<SearchBloc>(),
-            ),
-            BlocProvider(
-              create: (context) => sl<FilterBloc>(),
-            ),
-          ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: const AppRouter(),
-            onGenerateRoute: AppRouter.generateRoute,
-            initialRoute: AppRoutes.homeScreenRoute,
-          ),
-        );
-      },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<PokemonBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<SearchBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => sl<FilterBloc>(),
+        ),
+      ],
+      child: MaterialApp(
+        theme: theme(),
+        debugShowCheckedModeBanner: false,
+        home: const AppRouter(),
+        onGenerateRoute: AppRouter.generateRoute,
+        initialRoute: AppRoutes.homeScreenRoute,
+      ),
     );
   }
 }

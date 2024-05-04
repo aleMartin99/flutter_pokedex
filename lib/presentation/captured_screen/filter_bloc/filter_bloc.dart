@@ -13,33 +13,26 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> with BaseBloc {
       secureEmit(
         FilterState(
           isFilteringByAlphabetically: event.isFilteringByAlphabetically,
+          isFilteringByType: false,
+        ),
+      );
+    });
+
+    on<OnToggleByTypeFilterEvent>((event, emit) {
+      secureEmit(
+        FilterState(
+          isFilteringByType: event.isFilteringByType,
+          isFilteringByAlphabetically: false,
+        ),
+      );
+    });
+    on<OnResetFiltersEvent>((event, emit) {
+      secureEmit(
+        FilterState(
+          isFilteringByType: false,
+          isFilteringByAlphabetically: false,
         ),
       );
     });
   }
 }
-
-
-
-// import 'package:equatable/equatable.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_pokedex/core/utils/utils_exports.dart';
-
-// part 'filter_event.dart';
-// part 'filter_state.dart';
-// part 'filter_status.dart';
-
-// class FilterBloc extends Bloc<FilterEvent, FilterState> with BaseBloc {
-//   FilterBloc() : super(const FilterState()) {
-//     on<OnToggleAlphabeticallyFilterEvent>((event, emit) {
-//       secureEmit(
-//         state.copyWith(
-//           isFilteringByAlphabetically: event.isFilteringByAlphabetically,
-//           status: event.isFilteringByAlphabetically
-//               ? FilterStatus.isOrderedAlphabetically
-//               : FilterStatus.isNotOrderedAlphabetically,
-//         ),
-//       );
-//     });
-//   }
-// }

@@ -39,7 +39,7 @@ class _HomeBodyState extends State<HomeBody> {
           ),
           CategoryCard(
             title: 'Pokedex',
-            color: AppColors.red,
+            color: AppColors.primary.withOpacity(0.8),
             onPressed: () async {
               await Navigator.pushNamed(
                 context,
@@ -49,7 +49,7 @@ class _HomeBodyState extends State<HomeBody> {
           ),
           CategoryCard(
             title: 'Captured',
-            color: AppColors.blue,
+            color: AppColors.water,
             onPressed: () async {
               await Navigator.pushNamed(
                 context,

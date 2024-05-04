@@ -3,41 +3,21 @@
 part of 'filter_bloc.dart';
 
 class FilterState {
-  FilterState({this.isFilteringByAlphabetically = false});
+  FilterState({
+    this.isFilteringByAlphabetically = false,
+    this.isFilteringByType = false,
+  });
   final bool isFilteringByAlphabetically;
+  final bool isFilteringByType;
 
-  FilterState copyWith({bool? isFilteringByAlphabetically}) {
+  FilterState copyWith({
+    bool? isFilteringByType,
+    bool? isFilteringByAlphabetically,
+  }) {
     return FilterState(
+      isFilteringByType: isFilteringByType ?? this.isFilteringByType,
       isFilteringByAlphabetically:
           isFilteringByAlphabetically ?? this.isFilteringByAlphabetically,
     );
   }
 }
-
-
-// class FilterState extends Equatable {
-//   const FilterState({
-//     this.isFilteringByAlphabetically = false,
-//     this.status = FilterStatus.initial,
-//   });
-//   final bool isFilteringByAlphabetically;
-
-//   final FilterStatus status;
-
-//   FilterState copyWith({
-//     bool? isFilteringByAlphabetically,
-//     FilterStatus? status,
-//   }) {
-//     return FilterState(
-//       status: status ?? this.status,
-//       isFilteringByAlphabetically:
-//           isFilteringByAlphabetically ?? this.isFilteringByAlphabetically,
-//     );
-//   }
-
-//   @override
-//   List<Object?> get props => [
-//         status,
-//         isFilteringByAlphabetically,
-//       ];
-// }

@@ -22,12 +22,12 @@ class PokemonTypeCard extends StatelessWidget {
       color: Colors.transparent,
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: large ? 19 : 12,
+          horizontal: large ? 19 : 13,
           vertical: large ? 6 : 4,
         ),
-        decoration: ShapeDecoration(
-          shape: const StadiumBorder(),
-          color: Theme.of(context).colorScheme.background.withOpacity(0.3),
+        decoration: const ShapeDecoration(
+          shape: StadiumBorder(),
+          color: Colors.white24,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -37,13 +37,12 @@ class PokemonTypeCard extends StatelessWidget {
               textScaler: TextScaler.noScaling,
               style: TextStyle(
                 fontSize: large ? 12 : 8,
-                height: 0.8,
+                height: 0.9,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(width: 5),
           ],
         ),
       ),

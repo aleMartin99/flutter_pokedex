@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/shared_components/custom_scaffold.dart';
-import 'package:flutter_pokedex/core/theme/colors.dart';
-import 'package:flutter_pokedex/presentation/home_screen/components/category_card.dart';
 
+///
 class HeaderSection extends StatelessWidget implements PreferredSizeWidget {
-  final double height;
-
+  ///
   const HeaderSection({
+    super.key,
     required this.height,
   });
+
+  ///
+  final double height;
 
   @override
   Size get preferredSize => Size.fromHeight(height);

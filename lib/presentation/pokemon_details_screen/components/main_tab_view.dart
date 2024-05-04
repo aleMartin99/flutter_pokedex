@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/theme/colors.dart';
 
 ///Main tab data class
 class MainTabData {
+  ///
   const MainTabData({
     required this.label,
     required this.child,
@@ -44,7 +44,7 @@ class MainTabView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             _buildTopAnimatedPadding(),
-            _buildTabBar(),
+            _buildTabBar(context),
             _buildTabContent(),
           ],
         ),
@@ -65,12 +65,13 @@ class MainTabView extends StatelessWidget {
     );
   }
 
-//TODO put primary dynamic color
-  Widget _buildTabBar() {
+  Widget _buildTabBar(BuildContext context) {
     return TabBar(
+      unselectedLabelColor: Colors.black45,
+      labelColor: Colors.black,
       labelPadding: const EdgeInsets.symmetric(vertical: 16),
       indicatorSize: TabBarIndicatorSize.label,
-      indicatorColor: AppColors.indigo,
+      indicatorColor: Theme.of(context).colorScheme.primary,
       tabs: tabs.map((tab) => Text(tab.label)).toList(),
     );
   }

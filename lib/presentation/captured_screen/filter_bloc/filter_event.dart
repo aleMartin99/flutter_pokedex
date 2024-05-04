@@ -15,3 +15,20 @@ class OnToggleAlphabeticallyFilterEvent extends FilterEvent {
   @override
   List<Object> get props => [isFilteringByAlphabetically];
 }
+
+class OnToggleByTypeFilterEvent extends FilterEvent {
+  OnToggleByTypeFilterEvent({
+    required this.isFilteringByType,
+  });
+
+  /// By type filter status
+  final bool isFilteringByType;
+
+  @override
+  List<Object> get props => [isFilteringByType];
+}
+
+class OnResetFiltersEvent extends FilterEvent {
+  @override
+  List<Object> get props => [];
+}

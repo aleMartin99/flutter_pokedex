@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/constants/image_constants.dart';
 
+///Category card class
 class CategoryCard extends StatelessWidget {
+  ///
   const CategoryCard({
     required this.title,
     required this.color,
+    super.key,
     this.onPressed,
   });
+
+  ///
   final String title;
+
+  ///
   final Color color;
+
+  ///
   final VoidCallback? onPressed;
 
   @override

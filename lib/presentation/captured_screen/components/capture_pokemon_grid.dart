@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/core/services/order_alphabetically_service.dart';
+import 'package:flutter_pokedex/core/services/order_by_type.dart';
 import 'package:flutter_pokedex/core/shared_components/loading.dart';
+
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/captured_screen/filter_bloc/filter_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_card.dart';
@@ -42,6 +44,8 @@ class _CapturedPokemonGridState extends State<CapturedPokemonGrid> {
     );
   }
 
+  List<String> filters = ['Alphabetically', 'By type', 'None'];
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FilterBloc, FilterState>(
@@ -60,16 +64,55 @@ class _CapturedPokemonGridState extends State<CapturedPokemonGrid> {
                     onPressed: () => Navigator.pop(context),
                     icon: const Icon(CupertinoIcons.left_chevron),
                   ),
-                  IconButton(
-                    onPressed: () => context.read<FilterBloc>().add(
-                          OnToggleAlphabeticallyFilterEvent(
-                            isFilteringByAlphabetically:
-                                !filterState.isFilteringByAlphabetically,
+                  Container(
+                    width: MediaQuery.sizeOf(context).width * 0.4,
+                    child: DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
-                    icon: Icon(
-                      Icons.filter_alt,
-                      color: Theme.of(context).colorScheme.primary,
+                        enabledBorder: const UnderlineInputBorder(),
+                        contentPadding: EdgeInsets.zero,
+                        hintText: 'Fylter by',
+                        hintStyle: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.black54,
+                        ),
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                      ),
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      onChanged: (String? value) async {
+                        if (value == filters[0]) {
+                          context.read<FilterBloc>().add(
+                                OnToggleAlphabeticallyFilterEvent(
+                                  isFilteringByAlphabetically:
+                                      !filterState.isFilteringByAlphabetically,
+                                ),
+                              );
+                        } else if (value == filters[1]) {
+                          context.read<FilterBloc>().add(
+                                OnToggleByTypeFilterEvent(
+                                  isFilteringByType:
+                                      !filterState.isFilteringByType,
+                                ),
+                              );
+                        } else {
+                          context.read<FilterBloc>().add(OnResetFiltersEvent());
+                        }
+                      },
+                      items:
+                          filters.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          alignment: Alignment.centerLeft,
+                          value: value,
+                          child: Text(
+                            value,
+                            textAlign: TextAlign.left,
+                          ),
+                        );
+                      }).toList(),
                     ),
                   ),
                 ],
@@ -148,17 +191,33 @@ class _CapturedPokemonGridState extends State<CapturedPokemonGrid> {
                                         ),
                                       ),
                                     )
-                                  : List.generate(
-                                      pokemonState.capturedPokemonsList.length,
-                                      (index) => PokemonCard(
-                                        pokemonState
-                                            .capturedPokemonsList[index],
-                                        onPress: () => _onPokemonPress(
+                                  : (filterState.isFilteringByType)
+                                      ? List.generate(
+                                          orderByType(
+                                            pokemonState.capturedPokemonsList,
+                                          ).length,
+                                          (index) => PokemonCard(
+                                            orderByType(
+                                              pokemonState.capturedPokemonsList,
+                                            )[index],
+                                            onPress: () => _onPokemonPress(
+                                              pokemonState
+                                                  .capturedPokemonsList[index],
+                                            ),
+                                          ),
+                                        )
+                                      : List.generate(
                                           pokemonState
-                                              .capturedPokemonsList[index],
+                                              .capturedPokemonsList.length,
+                                          (index) => PokemonCard(
+                                            pokemonState
+                                                .capturedPokemonsList[index],
+                                            onPress: () => _onPokemonPress(
+                                              pokemonState
+                                                  .capturedPokemonsList[index],
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    ),
                             ),
                           )
                         : Column(

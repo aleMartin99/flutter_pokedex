@@ -55,8 +55,7 @@ class StatWidget extends StatelessWidget {
               final currentProgress = progress ?? value / 100;
 
               return ProgressBar(
-                //TODO poner colores en dependencia de primary color
-                progress: animation.value * currentProgress as double,
+                progress: animation.value * currentProgress,
                 color: Theme.of(context).primaryColor,
                 enableAnimation: animation.value == 1,
               );
@@ -146,20 +145,18 @@ class _PokemonBaseStatsState extends State<PokemonBaseStats>
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: List.generate(
-          stats?.length ?? 0,
-          (index) => Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 12,
-                ),
-                child: StatWidget(
-                  animation: _progressAnimation,
-                  label: stats![index].statName!,
-                  value: stats[index].baseStat!,
-                ),
-              ))
-      // const SizedBox(height: 14),
-
-      ,
+        stats?.length ?? 0,
+        (index) => Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 12,
+          ),
+          child: StatWidget(
+            animation: _progressAnimation,
+            label: stats![index].statName!,
+            value: stats[index].baseStat!,
+          ),
+        ),
+      ),
     );
   }
 }

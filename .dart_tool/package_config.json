@@ -458,12 +458,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "responsive_sizer",
-      "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/responsive_sizer-3.3.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "rxdart",
       "rootUri": "file:///Users/ale/.pub-cache/hosted/pub.dev/rxdart-0.27.7",
       "packageUri": "lib/",
@@ -668,7 +662,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-03T19:21:12.047043Z",
+  "generated": "2024-05-04T13:31:25.930761Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }
