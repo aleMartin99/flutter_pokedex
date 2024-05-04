@@ -10,4 +10,7 @@ class AppRoutes {
 
   /// path to access to pokedex screen route
   static String get pokedexScreenRoute => '/pokedex';
+
+  /// path to access to captured screen route
+  static String get capturedScreenRoute => '/captured';
 }

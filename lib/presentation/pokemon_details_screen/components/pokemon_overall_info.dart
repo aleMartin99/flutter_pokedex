@@ -55,8 +55,6 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
   @override
   void dispose() {
     _horizontalSlideController.dispose();
-    slideController.dispose();
-    rotateController.dispose();
 
     super.dispose();
   }
@@ -69,7 +67,7 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.06,
         ),
-        _buildAppBarButtons(widget.pokemon),
+        _buildAppBarButtons(),
         const SizedBox(height: 12),
         _buildPokemonName(widget.pokemon),
         const SizedBox(height: 10),
@@ -107,7 +105,7 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
     );
   }
 
-  Widget _buildAppBarButtons(Pokemon pokemon) {
+  Widget _buildAppBarButtons() {
     return Padding(
       padding: const EdgeInsets.only(left: 9, right: 12),
       child: Row(
@@ -118,15 +116,33 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
             icon: const Icon(CupertinoIcons.left_chevron),
           ),
           IconButton(
-            //Todo implement save captured pokemon
-            onPressed: () => Navigator.pop(context),
-            icon: Image(
-              image: AssetImage(
-                pokemon.isCaptured
-                    ? ImageConstants.capturedIcon
-                    : ImageConstants.notCapturedIcon,
-              ),
-              height: pokemon.isCaptured ? 30 : 26,
+            onPressed: () => context.read<PokemonBloc>().add(
+                  OnToggleCapturedPokemonEvent(
+                    capturedPokemon: widget.pokemon,
+                    isCaptured: !widget.pokemon.isCaptured,
+                  ),
+                ),
+            icon: BlocBuilder<PokemonBloc, PokemonState>(
+              builder: (context, state) {
+                return Image(
+                  image: AssetImage(
+                    state.pokemonsList
+                            .firstWhere(
+                              (element) => element.id == widget.pokemon.id,
+                            )
+                            .isCaptured
+                        ? ImageConstants.capturedIcon
+                        : ImageConstants.notCapturedIcon,
+                  ),
+                  height: state.pokemonsList
+                          .firstWhere(
+                            (element) => element.id == widget.pokemon.id,
+                          )
+                          .isCaptured
+                      ? 30
+                      : 26,
+                );
+              },
             ),
           ),
         ],

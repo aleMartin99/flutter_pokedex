@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
+import 'package:flutter_pokedex/presentation/captured_screen/captured_screen.dart';
 import 'package:flutter_pokedex/presentation/home_screen/home_screen_exports.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokedex_screen_exports.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/pokemon_details_screen.dart';
@@ -14,6 +15,9 @@ const String pokemonDetailsScreenRoute = '/pokemonDetails';
 
 /// key to compare pokedex screen route
 const String pokedexScreenRoute = '/pokedex';
+
+/// key to compare captured screen route
+const String capturedScreenRoute = '/captured';
 
 class AppRouter extends StatelessWidget {
   const AppRouter({super.key});
@@ -31,6 +35,10 @@ class AppRouter extends StatelessWidget {
         return MaterialPageRoute(
           builder: (_) => const PokedexScreen(),
         );
+      case capturedScreenRoute:
+        return MaterialPageRoute(
+          builder: (_) => const CapturedScreen(),
+        );
 
       case pokemonDetailsScreenRoute:
         if (args is PokemonDetailsArguments) {
@@ -43,7 +51,6 @@ class AppRouter extends StatelessWidget {
           return _errorRoute();
         }
 
-//TODO change to splash
       default:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
     }
@@ -51,7 +58,6 @@ class AppRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //TODO change to splash
     return const HomeScreen();
   }
 }

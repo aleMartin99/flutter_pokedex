@@ -1,11 +1,13 @@
-// ignore_for_file: collection_methods_unrelated_type, inference_failure_on_untyped_parameter, lines_longer_than_80_chars
+// ignore_for_file: collection_methods_unrelated_type, inference_failure_on_untyped_parameter, lines_longer_than_80_chars, unnecessary_statements
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/errors/failures.dart';
+import 'package:flutter_pokedex/core/utils/isar_helper.dart';
 import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/domain/usecases/get_pokemons/get_pokemons_usecase.dart';
+import 'package:flutter_pokedex/main.dart';
 import 'package:fpdart/fpdart.dart';
 
 part 'pokemon_event.dart';
@@ -26,16 +28,15 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
         final pokemonsList =
             (responseGetPokemons as Right).value as List<Pokemon>? ?? [];
 
-        // /// Checks if the pokemon is already captured
-        // for (var i = 0; i < pokemonsList.length; i++) {
-        //   //TOdo check if the pokemon is in db already
-        //   if (favoriteRadioStations.contains(
-        //     pokemonsList[i].id,
-        //   )) {
-        //     /// Mark the radio station as favorited in the radioStations list
-        //     pokemonsList[i].isCaptured = true;
-        //   }
-        // }
+        /// Checks if the pokemon is already captured
+        for (var i = 0; i < pokemonsList.length; i++) {
+          if (state.capturedPokemonsList
+              .where((element) => element.id == pokemonsList[i].id)
+              .isNotEmpty) {
+            /// Mark the pokemon as captured in the pokemonsList
+            pokemonsList[i].isCaptured = true;
+          }
+        }
 
         secureEmit(
           state.copyWith(
@@ -54,28 +55,59 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
       }
     });
 
-    // on<OnToggleCapturedPokemonEvent>((event, emit) async {
-    //   emit(state.copyWith(status: PokemonStatus.loadingToggleCaptured));
-    //   event.isCaptured
-    //       ? await _prefs.addFavoriteRadioStationId(
-    //           event.radioStationId,
-    //         )
-    //       : await _prefs.removeFavoriteRadioStationId(
-    //           event.radioStationId,
-    //         );
-    //   state.pokemonsList
-    //       .firstWhere((pokemon) => pokemon.id == event.radioStationId)
-    //       .isCaptured = event.isCaptured;
-    //   secureEmit(
-    //     state.copyWith(
-    //       status: event.isFavorite
-    //           ? RadioStationStatus.isFavRadioStation
-    //           : RadioStationStatus.isNotFavRadioStation,
-    //     ),
-    //   );
-    // });
+    on<OnToggleCapturedPokemonEvent>((event, emit) async {
+      emit(state.copyWith(status: PokemonStatus.loadingToggleCaptured));
+
+      event.isCaptured
+          //TODO call save to db useCase
+          ? {
+              //TODO check first where without loading the pokemons, esta lanzando error
+              state.pokemonsList
+                  .firstWhere(
+                    (pokemon) => pokemon.id == event.capturedPokemon.id,
+                  )
+                  .isCaptured = event.isCaptured,
+
+              await isarDBHelper.insertCapturedPokemon(event.capturedPokemon),
+            }
+
+          //TODO call remove from db useCase
+          : {
+              await isarDBHelper.removeCapturedPokemon(event.capturedPokemon),
+              state.pokemonsList
+                  .firstWhere(
+                    (pokemon) => pokemon.id == event.capturedPokemon.id,
+                  )
+                  .isCaptured = event.isCaptured,
+              state.capturedPokemonsList.removeWhere(
+                  (element) => element.id == event.capturedPokemon.id)
+            };
+
+      secureEmit(
+        state.copyWith(
+          status: event.isCaptured
+              ? PokemonStatus.isCaptured
+              : PokemonStatus.isNotCaptured,
+        ),
+      );
+    });
+
+    on<OnLoadCapturedPokemonsEvent>((event, emit) async {
+      emit(state.copyWith(status: PokemonStatus.loading));
+
+      final capturedPokemonsList = await isarDBHelper.getCapturedPokemons();
+      secureEmit(
+        state.copyWith(
+          status: PokemonStatus.success,
+          capturedPokemonsList: capturedPokemonsList,
+        ),
+      );
+    });
   }
 
   ///
   final GetPokemonsUsecase getPokemonsUsecase;
+
+  ///
+  var isarDBHelper = sl<IsarHelper>();
 }

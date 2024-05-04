@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter_pokedex/core/constants/pokemon_types.dart';
 import 'package:flutter_pokedex/core/services/capitalize_first_letter_service.dart';
+import 'package:flutter_pokedex/data/adapters/isar_pokemon.dart';
 import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model.dart';
 import 'package:flutter_pokedex/data/models/pokemon_model/stat.dart';
 
@@ -42,6 +43,30 @@ class Pokemon {
 
       /// By default is false because there is no info about it in the api
       isCaptured: false,
+    );
+  }
+
+  /// Method to convert from dbAdapter to entity
+  factory Pokemon.fromDBAdapter(IsarPokemon dbPokemon) {
+    return Pokemon(
+      id: dbPokemon.id,
+      name: dbPokemon.name,
+      height: dbPokemon.height,
+      weight: dbPokemon.weight,
+      stats: dbPokemon.stats!
+          .map(
+            (e) => Stat(
+              baseStat: e.baseStat,
+              statName: capitalizeFirstLetter(e.statName!),
+            ),
+          )
+          .toList(),
+      types: dbPokemon.types!
+          .map((e) => PokemonTypes.parse(e.displayName!))
+          .toList(),
+      image: dbPokemon.image,
+      livePreview: dbPokemon.livePreview,
+      isCaptured: true,
     );
   }
 

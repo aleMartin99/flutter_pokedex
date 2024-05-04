@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 import 'package:flutter_pokedex/data/models/pokemon_model/sprites.dart';

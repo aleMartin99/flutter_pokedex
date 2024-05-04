@@ -12,20 +12,29 @@ class OnLoadPokemonsEvent extends PokemonEvent {
   List<Object> get props => [];
 }
 
+///
+class OnLoadCapturedPokemonsEvent extends PokemonEvent {
+  ///
+  OnLoadCapturedPokemonsEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
 ///OnToggleCapturedPokemonEvent class
 class OnToggleCapturedPokemonEvent extends PokemonEvent {
   ///
   OnToggleCapturedPokemonEvent({
-    required this.capturedPokemonId,
+    required this.capturedPokemon,
     required this.isCaptured,
   });
 
-  /// captured pokemon id.
-  final String capturedPokemonId;
+  /// captured pokemon .
+  final Pokemon capturedPokemon;
 
   /// Captured state to toggle.
   final bool isCaptured;
 
   @override
-  List<Object> get props => [capturedPokemonId, isCaptured];
+  List<Object> get props => [capturedPokemon, isCaptured];
 }

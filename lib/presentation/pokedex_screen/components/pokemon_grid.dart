@@ -128,7 +128,7 @@ class _PokemonGridState extends State<PokemonGrid> {
                       ),
                     ],
                   )
-                : pokemonState.status == PokemonStatus.success
+                : pokemonState.pokemonsList.isNotEmpty
                     ? searchState.isSearching
                         ? pokemonState.pokemonsList
                                 .where(
@@ -205,16 +205,21 @@ class _PokemonGridState extends State<PokemonGrid> {
   }
 
   Widget _buildError() {
-    return Center(
-      child: Container(
-        padding: const EdgeInsets.only(bottom: 28),
-        alignment: Alignment.center,
-        child: const Icon(
-          Icons.warning_amber_rounded,
-          size: 60,
-          color: Colors.black26,
+    return Column(
+      children: [
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.33,
         ),
-      ),
+        Container(
+          padding: const EdgeInsets.only(bottom: 28),
+          alignment: Alignment.center,
+          child: const Icon(
+            Icons.warning_amber_rounded,
+            size: 60,
+            color: Colors.black26,
+          ),
+        ),
+      ],
     );
   }
 }
