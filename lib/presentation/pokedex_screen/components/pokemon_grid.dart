@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/core/shared_components/loading.dart';
@@ -100,9 +101,17 @@ class _PokemonGridState extends State<PokemonGrid> {
             ),
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(20),
-          child: SearchField(),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: SizedBox(
+              width: (Platform.isMacOS || Platform.isWindows)
+                  ? MediaQuery.sizeOf(context).width * 0.4
+                  : MediaQuery.sizeOf(context).width * 1,
+              child: const SearchField(),
+            ),
+          ),
         ),
         _buildGrid(),
       ],

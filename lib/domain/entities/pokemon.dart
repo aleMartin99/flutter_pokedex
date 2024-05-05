@@ -1,5 +1,4 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/constants/pokemon_types.dart';
 import 'package:flutter_pokedex/core/services/capitalize_first_letter_service.dart';
 import 'package:flutter_pokedex/data/adapters/isar_pokemon.dart';
