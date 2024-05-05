@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -154,7 +154,10 @@ class _PokemonGridState extends State<PokemonGrid> {
                                   physics: const BouncingScrollPhysics(),
                                   childAspectRatio: 1.2,
                                   shrinkWrap: true,
-                                  crossAxisCount: 2,
+                                  crossAxisCount:
+                                      (Platform.isMacOS || Platform.isWindows)
+                                          ? 5
+                                          : 2,
                                   crossAxisSpacing: 15,
                                   mainAxisSpacing: 12,
                                   children: pokemonState.pokemonsList
@@ -183,7 +186,10 @@ class _PokemonGridState extends State<PokemonGrid> {
                               physics: const BouncingScrollPhysics(),
                               childAspectRatio: 1.2,
                               shrinkWrap: true,
-                              crossAxisCount: 2,
+                              crossAxisCount:
+                                  (Platform.isMacOS || Platform.isWindows)
+                                      ? 5
+                                      : 2,
                               crossAxisSpacing: 15,
                               mainAxisSpacing: 12,
                               children: List.generate(

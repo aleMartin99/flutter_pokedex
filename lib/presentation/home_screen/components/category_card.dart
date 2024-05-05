@@ -26,6 +26,7 @@ class CategoryCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: SizedBox(
         height: 100,
+        // width: MediaQuery.of(context).size.width * 0.3,
         child: LayoutBuilder(
           builder: (_, constraints) {
             final height = constraints.maxHeight;

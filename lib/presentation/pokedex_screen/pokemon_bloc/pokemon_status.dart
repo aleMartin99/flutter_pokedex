@@ -6,6 +6,7 @@ enum PokemonStatus {
   initial,
   loading,
   loadingToggleCaptured,
+  successLoadCaptured,
   success,
   isCaptured,
   isNotCaptured,

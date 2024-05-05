@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/constants/image_constants.dart';
+import 'package:flutter_pokedex/core/services/dynamic_color_service.dart';
 import 'package:flutter_pokedex/core/shared_components/pokemon_type_card.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_image.dart';
@@ -108,23 +109,31 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
   Widget _buildAppBarButtons() {
     return Padding(
       padding: const EdgeInsets.only(left: 9, right: 12),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(CupertinoIcons.left_chevron),
-          ),
-          IconButton(
-            onPressed: () => context.read<PokemonBloc>().add(
-                  OnToggleCapturedPokemonEvent(
-                    capturedPokemon: widget.pokemon,
-                    isCaptured: !widget.pokemon.isCaptured,
-                  ),
-                ),
-            icon: BlocBuilder<PokemonBloc, PokemonState>(
-              builder: (context, state) {
-                return Image(
+      child: BlocBuilder<PokemonBloc, PokemonState>(
+        builder: (context, state) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(CupertinoIcons.left_chevron),
+              ),
+              IconButton(
+                onPressed: () {
+                  context.read<PokemonBloc>().add(
+                        OnToggleCapturedPokemonEvent(
+                          capturedPokemon: widget.pokemon,
+                          isCaptured: state.pokemonsList.isNotEmpty &&
+                              !state.pokemonsList
+                                  .firstWhere(
+                                    (element) =>
+                                        element.id == widget.pokemon.id,
+                                  )
+                                  .isCaptured,
+                        ),
+                      );
+                },
+                icon: Image(
                   image: AssetImage(
                     state.pokemonsList.isNotEmpty &&
                             state.pokemonsList
@@ -141,13 +150,13 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
                                 (element) => element.id == widget.pokemon.id,
                               )
                               .isCaptured
-                      ? 30
+                      ? 31
                       : 26,
-                );
-              },
-            ),
-          ),
-        ],
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -233,11 +242,6 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
                 ],
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 20.0),
-            //   child:
-
-            // ),
             Align(
               alignment: Alignment.bottomCenter,
               child: RotationTransition(
@@ -256,8 +260,6 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
               padding: const EdgeInsets.symmetric(
                 vertical: 5,
               ),
-              // tintColor: selected ? null : Colors.black26,
-              // useHero: selected,
             ),
           ],
         ),

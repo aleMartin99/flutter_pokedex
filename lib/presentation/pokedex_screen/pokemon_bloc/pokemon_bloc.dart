@@ -3,6 +3,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/errors/failures.dart';
+import 'package:flutter_pokedex/core/services/dynamic_color_service.dart';
 import 'package:flutter_pokedex/core/utils/isar_helper.dart';
 import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
@@ -57,18 +58,20 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
 
     on<OnToggleCapturedPokemonEvent>((event, emit) async {
       emit(state.copyWith(status: PokemonStatus.loadingToggleCaptured));
-
+//TODO error aqui al acceder al firstwhere y no hay ninguno q cumpla la condicion
       event.isCaptured
           //TODO call save to db useCase
           ? {
-              //TODO check first where without loading the pokemons, esta lanzando error
               state.pokemonsList
                   .firstWhere(
                     (pokemon) => pokemon.id == event.capturedPokemon.id,
                   )
                   .isCaptured = event.isCaptured,
-
               await isarDBHelper.insertCapturedPokemon(event.capturedPokemon),
+              state.capturedPokemonsList.add(event.capturedPokemon),
+              secureEmit(
+                state.copyWith(status: PokemonStatus.isCaptured),
+              ),
             }
 
           //TODO call remove from db useCase
@@ -82,24 +85,20 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
               state.capturedPokemonsList.removeWhere(
                 (element) => element.id == event.capturedPokemon.id,
               ),
+              secureEmit(
+                state.copyWith(status: PokemonStatus.isNotCaptured),
+              )
             };
-
-      secureEmit(
-        state.copyWith(
-          status: event.isCaptured
-              ? PokemonStatus.isCaptured
-              : PokemonStatus.isNotCaptured,
-        ),
-      );
     });
 
     on<OnLoadCapturedPokemonsEvent>((event, emit) async {
       emit(state.copyWith(status: PokemonStatus.loading));
 
       final capturedPokemonsList = await isarDBHelper.getCapturedPokemons();
+
       secureEmit(
         state.copyWith(
-          status: PokemonStatus.success,
+          status: PokemonStatus.successLoadCaptured,
           capturedPokemonsList: capturedPokemonsList,
         ),
       );

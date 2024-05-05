@@ -28,8 +28,8 @@ class ProgressBar extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       height: 3,
       alignment: Alignment.centerLeft,
-      decoration: ShapeDecoration(
-        shape: const StadiumBorder(),
+      decoration: const ShapeDecoration(
+        shape: StadiumBorder(),
         color: Colors.grey,
       ),
       child: enableAnimation

@@ -4,7 +4,10 @@ import 'package:flutter_pokedex/presentation/home_screen/home_screen_exports.dar
 /// Home screen
 class HomeScreen extends StatelessWidget {
   ///
-  const HomeScreen({super.key});
+  const HomeScreen({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

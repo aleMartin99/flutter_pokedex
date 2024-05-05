@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,11 +27,19 @@ class _CapturedPokemonGridState extends State<CapturedPokemonGrid> {
   @override
   void initState() {
     super.initState();
-
+    filterBlocContextToDispose = context.read<FilterBloc>();
     scheduleMicrotask(() {
       context.read<PokemonBloc>().add(OnLoadCapturedPokemonsEvent());
       context.read<PokemonBloc>().add(OnLoadCapturedPokemonsEvent());
     });
+  }
+
+  late final filterBlocContextToDispose;
+
+  @override
+  void dispose() {
+    super.dispose();
+    filterBlocContextToDispose.add(OnResetFiltersEvent());
   }
 
   Future<void> _onPokemonPress(Pokemon pokemon) async {
@@ -64,7 +72,7 @@ class _CapturedPokemonGridState extends State<CapturedPokemonGrid> {
                     onPressed: () => Navigator.pop(context),
                     icon: const Icon(CupertinoIcons.left_chevron),
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.sizeOf(context).width * 0.4,
                     child: DropdownButtonFormField<String>(
                       decoration: InputDecoration(
@@ -172,7 +180,10 @@ class _CapturedPokemonGridState extends State<CapturedPokemonGrid> {
                               physics: const BouncingScrollPhysics(),
                               childAspectRatio: 1.2,
                               shrinkWrap: true,
-                              crossAxisCount: 2,
+                              crossAxisCount:
+                                  (Platform.isMacOS || Platform.isWindows)
+                                      ? 5
+                                      : 2,
                               crossAxisSpacing: 15,
                               mainAxisSpacing: 12,
                               children: (filterState
