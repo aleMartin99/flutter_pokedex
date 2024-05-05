@@ -1,1 +1,0 @@
- /Users/ale/Projects/Flutter\ Projects/DevestSolutions/Test/flutter_pokedex/.dart_tool/flutter_build/6929245486fba6821cfe166fa3170b09/native_assets.yaml: 
