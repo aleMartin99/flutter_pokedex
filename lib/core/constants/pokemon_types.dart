@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs
 
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/theme/colors.dart';
 
 enum PokemonTypes {
