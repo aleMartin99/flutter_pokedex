@@ -207,7 +207,7 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
                         size: 20,
                       ),
                       Text(
-                        '${widget.pokemon.height} hg',
+                        '${widget.pokemon.weight} hg',
                         style: const TextStyle(
                           fontSize: 13,
                           height: 0.8,
@@ -226,7 +226,7 @@ class _PokemonOverallInfoState extends State<PokemonOverallInfo>
                         size: 18,
                       ),
                       Text(
-                        '${widget.pokemon.height} hg',
+                        '${widget.pokemon.height} dm',
                         style: const TextStyle(
                           fontSize: 13,
                           height: 0.8,
