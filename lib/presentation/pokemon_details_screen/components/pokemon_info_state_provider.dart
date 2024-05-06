@@ -3,15 +3,15 @@
 import 'package:flutter/material.dart';
 
 class PokemonInfoStateProvider extends InheritedWidget {
-  final AnimationController slideController;
-  final AnimationController rotateController;
-
+  ///
   const PokemonInfoStateProvider({
-    super.key,
     required this.slideController,
     required this.rotateController,
     required super.child,
+    super.key,
   });
+  final AnimationController slideController;
+  final AnimationController rotateController;
 
   static PokemonInfoStateProvider of(BuildContext context) {
     final result =

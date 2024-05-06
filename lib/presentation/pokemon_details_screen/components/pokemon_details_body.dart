@@ -1,15 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart' hide AnimatedSlide;
-import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/animated_fade.dart';
-
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_info_card.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_overall_info.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
-
-part 'pokemon_details_decoration.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/pokemon_details_screen_exports.dart';
 
 ///Pokemon details body class
 class PokemonDetailsBody extends StatefulWidget {

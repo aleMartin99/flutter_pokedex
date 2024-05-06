@@ -1,4 +1,10 @@
-part of 'pokemon_details_body.dart';
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
+import 'package:flutter_pokedex/core/shared_components/shared_components_exports.dart';
+import 'package:flutter_pokedex/domain/entities/pokemon.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/pokemon_details_screen_exports.dart';
 
 /// PokemonDetailsDecoration
 class PokemonDetailsDecoration extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/presentation/captured_screen/components/captured__body.dart';
+import 'package:flutter_pokedex/presentation/captured_screen/captured_screen_exports.dart';
 
 /// Captured screen
 class CapturedScreen extends StatelessWidget {

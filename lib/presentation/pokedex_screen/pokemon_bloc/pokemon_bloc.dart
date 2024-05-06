@@ -7,10 +7,8 @@ import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/domain/usecases/get_captured_pokemons/get_captured_pokemons_usecase.dart';
 import 'package:flutter_pokedex/domain/usecases/get_pokemons/get_pokemons_usecase.dart';
-import 'package:flutter_pokedex/domain/usecases/insert_captured_pokemon/insert_captured_pokemon_params.dart';
-import 'package:flutter_pokedex/domain/usecases/insert_captured_pokemon/insert_captured_pokemon_usecase.dart';
-import 'package:flutter_pokedex/domain/usecases/remove_captured_pokemon/remove_captured_pokemon_params.dart';
-import 'package:flutter_pokedex/domain/usecases/remove_captured_pokemon/remove_captured_pokemon_usecase.dart';
+import 'package:flutter_pokedex/domain/usecases/insert_captured_pokemon/insert_captured_pokemon_exports.dart';
+import 'package:flutter_pokedex/domain/usecases/remove_captured_pokemon/remove_captured_pokemon_exports.dart';
 import 'package:fpdart/fpdart.dart';
 
 part 'pokemon_event.dart';

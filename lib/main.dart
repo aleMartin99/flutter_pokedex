@@ -3,7 +3,6 @@ import 'package:flutter_pokedex/app.dart';
 import 'package:flutter_pokedex/core/injection_container/init_core.dart';
 import 'package:flutter_pokedex/core/services/services_exports.dart';
 import 'package:flutter_pokedex/core/theme/theme_exports.dart';
-import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 

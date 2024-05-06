@@ -4,10 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
-import 'package:flutter_pokedex/core/shared_components/loading.dart';
+import 'package:flutter_pokedex/core/shared_components/shared_components_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_card.dart';
-import 'package:flutter_pokedex/presentation/pokedex_screen/components/search_field.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/pokedex_screen_exports.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
 

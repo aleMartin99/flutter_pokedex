@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/shared_components/custom_scaffold.dart';
-import 'package:flutter_pokedex/presentation/captured_screen/components/capture_pokemon_grid.dart';
+import 'package:flutter_pokedex/core/shared_components/shared_components_exports.dart';
+import 'package:flutter_pokedex/presentation/captured_screen/captured_screen_exports.dart';
 
 /// CapturedBody class
 class CapturedBody extends StatefulWidget {

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_dynamic_calls
+// ignore_for_file: avoid_dynamic_calls, inference_failure_on_uninitialized_variable, type_annotate_public_apis, prefer_typing_uninitialized_variables, lines_longer_than_80_chars
 
 import 'dart:async';
 import 'dart:io';
@@ -7,11 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/core/services/services_exports.dart';
-import 'package:flutter_pokedex/core/shared_components/loading.dart';
+import 'package:flutter_pokedex/core/shared_components/shared_components_exports.dart';
 
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/captured_screen/filter_bloc/filter_bloc.dart';
-import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_card.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
 
@@ -53,6 +52,7 @@ class _CapturedPokemonGridState extends State<CapturedPokemonGrid> {
     );
   }
 
+  ///List of
   List<String> filters = ['Alphabetically', 'By type', 'None'];
 
   @override

@@ -7,9 +7,8 @@ import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/core/services/services_exports.dart';
 import 'package:flutter_pokedex/core/theme/theme_exports.dart';
+import 'package:flutter_pokedex/presentation/home_screen/home_screen_exports.dart';
 
-import 'package:flutter_pokedex/presentation/home_screen/components/category_card.dart';
-import 'package:flutter_pokedex/presentation/home_screen/components/header.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +41,7 @@ class _HomeBodyState extends State<HomeBody> {
           if (state.status == PokemonStatus.successLoadCaptured ||
               state.status == PokemonStatus.isCaptured ||
               state.status == PokemonStatus.isNotCaptured) {
-            var predominantColor = getPredominantPoKeTypeColor(
+            final predominantColor = getPredominantPoKeTypeColor(
               state.capturedPokemonsList,
             );
 

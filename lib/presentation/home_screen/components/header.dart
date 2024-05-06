@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/shared_components/custom_scaffold.dart';
+import 'package:flutter_pokedex/core/shared_components/shared_components_exports.dart';
 
 ///
 class HeaderSection extends StatelessWidget implements PreferredSizeWidget {

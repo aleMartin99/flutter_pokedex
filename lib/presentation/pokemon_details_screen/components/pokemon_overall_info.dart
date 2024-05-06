@@ -4,13 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/constants/image_constants.dart';
-import 'package:flutter_pokedex/core/services/dynamic_color_service.dart';
-import 'package:flutter_pokedex/core/shared_components/pokemon_type_card.dart';
+import 'package:flutter_pokedex/core/shared_components/shared_components_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_image.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/pokedex_screen_exports.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/animated_fade.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/pokemon_details_screen_exports.dart';
 import 'package:line_icons/line_icons.dart';
 
 /// PokemonOverallInfo class

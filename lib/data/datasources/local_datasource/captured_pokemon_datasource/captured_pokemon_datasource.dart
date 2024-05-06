@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:flutter_pokedex/core/errors/failures.dart';
 import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:flutter_pokedex/data/datasources/local_datasource/local_datasource_exports.dart';
-import 'package:flutter_pokedex/data/models/local_models/db_pokemon/isar_pokemon.dart';
+import 'package:flutter_pokedex/data/models/local_models/local_models_exports.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:isar/isar.dart';
 

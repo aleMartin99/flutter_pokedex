@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_pokedex/core/shared_components/custom_scaffold.dart';
-import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_grid.dart';
+import 'package:flutter_pokedex/core/shared_components/shared_components_exports.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/pokedex_screen_exports.dart';
 
 /// PokedexBody class
 class PokedexBody extends StatefulWidget {

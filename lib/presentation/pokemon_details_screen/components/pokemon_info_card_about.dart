@@ -3,7 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/pokemon_details_screen_exports.dart';
 
 class Label extends StatelessWidget {
   ///

@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 
 /// ProgressBar class to show the stats.
 class ProgressBar extends StatelessWidget {
+  ///
   const ProgressBar({
+    required this.progress,
     super.key,
     this.color,
     this.backgroundColor,
     this.enableAnimation = true,
-    required this.progress,
   });
 
+  ///
   final Color? backgroundColor;
+
+  ///
   final Color? color;
+
+  ///
   final double progress;
+
+  ///
   final bool enableAnimation;
 
   @override

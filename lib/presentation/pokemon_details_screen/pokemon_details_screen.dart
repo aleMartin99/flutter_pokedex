@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_details_body.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/pokemon_details_screen_exports.dart';
 
 /// PokemonDetails screen
 class PokemonDetailsScreen extends StatelessWidget {
   ///
-  const PokemonDetailsScreen({super.key, required this.pokemon});
+  const PokemonDetailsScreen({required this.pokemon, super.key});
 
+  ///
   final Pokemon pokemon;
   @override
   Widget build(BuildContext context) {

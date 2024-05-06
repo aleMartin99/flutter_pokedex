@@ -11,7 +11,7 @@ import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon
 import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
 import 'package:provider/provider.dart';
 
-/// Base class for the application
+/// application Base class
 
 class App extends StatefulWidget {
   const App({super.key});

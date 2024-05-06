@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/constants/colors.dart';
-import 'package:flutter_pokedex/data/models/remote_models/pokemon_model/stat.dart';
+import 'package:flutter_pokedex/data/models/remote_models/remote_models_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/progress.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/pokemon_details_screen_exports.dart';
 
 ///StatWidget class
 class StatWidget extends StatelessWidget {
+  ///
   const StatWidget({
     required this.animation,
     required this.label,

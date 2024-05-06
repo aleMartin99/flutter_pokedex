@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/constants/constants_exports.dart';
-import 'package:flutter_pokedex/core/shared_components/pokemon_type_card.dart';
+import 'package:flutter_pokedex/core/shared_components/shared_components_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_image.dart';
+import 'package:flutter_pokedex/presentation/pokedex_screen/pokedex_screen_exports.dart';
 
 /// PokemonCard class
 class PokemonCard extends StatelessWidget {
