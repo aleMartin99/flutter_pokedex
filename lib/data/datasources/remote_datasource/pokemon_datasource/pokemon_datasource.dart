@@ -5,8 +5,8 @@ import 'dart:convert';
 
 import 'package:flutter_pokedex/core/constants/api_helper.dart';
 import 'package:flutter_pokedex/core/errors/failures.dart';
-import 'package:flutter_pokedex/data/datasources/remote_datasource/datasource_exports.dart';
-import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model_exports.dart';
+import 'package:flutter_pokedex/data/datasources/remote_datasource/remote_datasource_exports.dart';
+import 'package:flutter_pokedex/data/models/remote_models/remote_models_exports.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 

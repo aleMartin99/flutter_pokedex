@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_pokedex/core/shared_components/custom_scaffold.dart';
 import 'package:flutter_pokedex/presentation/captured_screen/components/capture_pokemon_grid.dart';
 

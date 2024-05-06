@@ -1,6 +1,6 @@
 // ignore_for_file: cascade_invocations
 
-import 'package:flutter_pokedex/data/adapters/isar_pokemon.dart';
+import 'package:flutter_pokedex/data/models/local_models/db_pokemon/isar_pokemon.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 
 /// Method to convert from entity to dbAdapter

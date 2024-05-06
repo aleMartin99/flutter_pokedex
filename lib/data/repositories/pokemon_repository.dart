@@ -1,12 +1,12 @@
 import 'package:flutter_pokedex/core/errors/failures.dart';
-import 'package:flutter_pokedex/data/datasources/remote_datasource/datasource_exports.dart';
-import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model_exports.dart';
+import 'package:flutter_pokedex/data/datasources/remote_datasource/remote_datasource_exports.dart';
+import 'package:flutter_pokedex/data/models/remote_models/remote_models_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-import 'package:flutter_pokedex/domain/repositories/ipokemon_repository.dart';
+import 'package:flutter_pokedex/domain/repositories/ipokemon_remote_repository.dart';
 import 'package:fpdart/fpdart.dart';
 
 /// PokemonRepository implementation
-class PokemonRepository implements IPokemonRepository {
+class PokemonRepository implements IPokemonRemoteRepository {
   ///
   PokemonRepository(this.datasource);
 

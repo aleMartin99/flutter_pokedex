@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
+import 'package:flutter_pokedex/core/theme/theme_exports.dart';
 import 'package:flutter_pokedex/main.dart';
 import 'package:flutter_pokedex/presentation/captured_screen/filter_bloc/filter_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/search_bloc/search_bloc.dart';
-import 'package:flutter_pokedex/core/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 /// Base class for the application

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 import 'package:flutter_pokedex/core/services/services_exports.dart';
-import 'package:flutter_pokedex/data/adapters/isar_pokemon.dart';
-import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model_exports.dart';
+import 'package:flutter_pokedex/data/models/local_models/db_pokemon/isar_pokemon.dart';
+import 'package:flutter_pokedex/data/models/remote_models/remote_models_exports.dart';
 
 /// Pokemon entity
 class Pokemon {
