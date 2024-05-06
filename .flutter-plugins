@@ -1,0 +1,10 @@
+# This is a generated file; do not edit or check into version control.
+isar_flutter_libs=/Users/ale/.pub-cache/hosted/pub.dev/isar_flutter_libs-3.1.0+1/
+path_provider=/Users/ale/.pub-cache/hosted/pub.dev/path_provider-2.1.3/
+path_provider_android=/Users/ale/.pub-cache/hosted/pub.dev/path_provider_android-2.2.4/
+path_provider_foundation=/Users/ale/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.2/
+path_provider_linux=/Users/ale/.pub-cache/hosted/pub.dev/path_provider_linux-2.2.1/
+path_provider_windows=/Users/ale/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.1/
+screen_retriever=/Users/ale/.pub-cache/hosted/pub.dev/screen_retriever-0.1.9/
+sqflite=/Users/ale/.pub-cache/hosted/pub.dev/sqflite-2.3.3/
+window_manager=/Users/ale/.pub-cache/hosted/pub.dev/window_manager-0.3.8/

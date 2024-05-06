@@ -1,36 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pokedex/app.dart';
+import 'package:flutter_pokedex/core/injection_container/init_core.dart';
+import 'package:flutter_pokedex/core/services/services_exports.dart';
+import 'package:flutter_pokedex/core/theme/theme_exports.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const Pokedex());
-}
+/// Service locator instance
+final sl = GetIt.I;
 
-class Pokedex extends StatelessWidget {
-  const Pokedex({super.key});
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pokédex Code Challenge',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Home(),
-    );
-  }
-}
+  await windowVisibilityService();
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+  // Initialize all dependencies with the given GetIt service locator as sl
+  await initCore(sl);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Pokédex Code Challenge'),
-      ),
-      body: const Center(child: Text('Lee el README para comenzar')),
-    );
-  }
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(theme()),
+      child: const App(),
+    ),
+  );
 }
