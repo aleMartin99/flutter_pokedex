@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/constants/pokemon_types.dart';
-import 'package:flutter_pokedex/core/theme/colors.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 
-///
+/// method to get the Predominant color of pokemons
 Color getPredominantPoKeTypeColor(List<Pokemon> capturedPokemons) {
-  Map<PokemonTypes, int> typeCount = {};
+  final typeCount = <PokemonTypes, int>{};
 
-  for (var pokemon in capturedPokemons) {
+  for (final pokemon in capturedPokemons) {
     if (pokemon.types != null && pokemon.types!.isNotEmpty) {
-      var type = pokemon.types!.first; // Solo se considera el primer tipo
+      final type = pokemon.types!.first;
+
+      /// only considering the first type
       if (typeCount.containsKey(type)) {
         typeCount[type] = typeCount[type]! + 1;
       } else {
@@ -19,21 +20,22 @@ Color getPredominantPoKeTypeColor(List<Pokemon> capturedPokemons) {
   }
 
   if (typeCount.isNotEmpty) {
-    // Encontrar el tipo más común y comprobar si hay empates
-    int highestFrequency = typeCount.values.reduce((a, b) => a > b ? a : b);
-    var mostCommonTypes = typeCount.entries
+    /// find the most common type
+    final highestFrequency = typeCount.values.reduce((a, b) => a > b ? a : b);
+    final mostCommonTypes = typeCount.entries
         .where((entry) => entry.value == highestFrequency)
         .toList();
 
-    // Devolver el color asociado al tipo más común o el color por defecto si hay empate
+    /// returns the color associated with the most common type
+    /// or the default if there is a tie
     if (mostCommonTypes.length == 1) {
       return mostCommonTypes.first.key.color;
     } else {
-      // Retorno un color por defecto si no hay pokémon capturados
+      // returns the default color if there is not a predominant pokemon type
       return AppColors.primary;
     }
   } else {
-    // Retorno un color por defecto si no hay pokémon capturados
+    // returns the default color if there is not a predominant pokemon type
     return AppColors.primary;
   }
 }

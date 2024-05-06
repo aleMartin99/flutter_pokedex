@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/theme/colors.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 
 enum PokemonTypes {
   bug('Bug', AppColors.bug),

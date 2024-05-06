@@ -3,14 +3,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
-import 'package:flutter_pokedex/core/services/dynamic_color_service.dart';
+import 'package:flutter_pokedex/core/services/services_exports.dart';
+import 'package:flutter_pokedex/core/theme/theme_exports.dart';
 
-import 'package:flutter_pokedex/core/theme/colors.dart';
 import 'package:flutter_pokedex/presentation/home_screen/components/category_card.dart';
 import 'package:flutter_pokedex/presentation/home_screen/components/header.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/pokemon_bloc/pokemon_bloc.dart';
-import 'package:flutter_pokedex/core/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 /// HomeBody class

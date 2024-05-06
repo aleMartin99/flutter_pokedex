@@ -14,4 +14,8 @@ class ImageConstants {
 
   /// not captured Icon path
   static const String notCapturedIcon = '${basePath}not_captured_icon.png';
+
+  /// network pokeball gif path
+  static const String pokeballGif =
+      'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNXI0djBqOTNqMTNoZzhyOGtyMG9teHY5cDNhZjl6ZjIxd3dudGtqaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/XGbRD1gREhvBysGial/giphy.gif';
 }

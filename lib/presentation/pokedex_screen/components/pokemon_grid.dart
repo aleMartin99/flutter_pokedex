@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
 import 'package:flutter_pokedex/core/shared_components/loading.dart';
@@ -22,41 +21,13 @@ class PokemonGrid extends StatefulWidget {
 }
 
 class _PokemonGridState extends State<PokemonGrid> {
-  static const double _endReachedThreshold = 200;
-
-  final GlobalKey<NestedScrollViewState> _scrollKey = GlobalKey();
-
   @override
   void initState() {
     super.initState();
 
     scheduleMicrotask(() {
       context.read<PokemonBloc>().add(OnLoadPokemonsEvent());
-      _scrollKey.currentState?.innerController.addListener(_onScroll);
     });
-  }
-
-  @override
-  void dispose() {
-    _scrollKey.currentState?.innerController.dispose();
-    _scrollKey.currentState?.dispose();
-
-    super.dispose();
-  }
-
-  void _onScroll() {
-    final innerController = _scrollKey.currentState?.innerController;
-
-    if (innerController == null || !innerController.hasClients) return;
-
-    final thresholdReached =
-        innerController.position.extentAfter < _endReachedThreshold;
-
-//TODO something to load more
-    if (thresholdReached) {
-      // Load more!
-      // pokemonBloc.add(const PokemonLoadMoreStarted());
-    }
   }
 
   Future<void> _onPokemonPress(Pokemon pokemon) async {
@@ -72,7 +43,6 @@ class _PokemonGridState extends State<PokemonGrid> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      key: _scrollKey,
       children: [
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.06,

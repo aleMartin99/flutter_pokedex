@@ -1,8 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import 'package:flutter_pokedex/data/models/pokemon_model/sprites.dart';
-import 'package:flutter_pokedex/data/models/pokemon_model/stat.dart';
-import 'package:flutter_pokedex/data/models/pokemon_model/type.dart';
+import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model_exports.dart';
 
 /// Pokemon Model.
 class PokemonModel extends Equatable {

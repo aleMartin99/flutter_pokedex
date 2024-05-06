@@ -1,7 +1,13 @@
-part of 'pokemon_details_body.dart';
+// ignore_for_file: public_member_api_docs
 
-class _Label extends StatelessWidget {
-  const _Label(this.text);
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_pokedex/domain/entities/pokemon.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
+
+class Label extends StatelessWidget {
+  ///
+  const Label(this.text, {super.key});
   final String text;
 
   @override
@@ -16,9 +22,10 @@ class _Label extends StatelessWidget {
   }
 }
 
-class _ContentSection extends StatelessWidget {
-  const _ContentSection({
+class ContentSection extends StatelessWidget {
+  const ContentSection({
     required this.label,
+    super.key,
     this.children,
   });
   final String label;

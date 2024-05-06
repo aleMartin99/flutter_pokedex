@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/constants/pokemon_types.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 
 /// Pokemon Type card class
 class PokemonTypeCard extends StatelessWidget {

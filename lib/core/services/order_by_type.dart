@@ -6,7 +6,8 @@ import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 List<Pokemon> orderByType(List<Pokemon> pokemonList) {
   final orderedPokemonsList = <Pokemon>[];
   orderedPokemonsList.addAll(pokemonList);
-  orderedPokemonsList.sort((a, b) =>
-      a.types!.first.displayName.compareTo(b.types!.first.displayName));
+  orderedPokemonsList.sort(
+    (a, b) => a.types!.first.displayName.compareTo(b.types!.first.displayName),
+  );
   return orderedPokemonsList;
 }

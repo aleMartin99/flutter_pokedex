@@ -31,16 +31,19 @@ class PokemonDetailsDecoration extends StatelessWidget {
   }
 }
 
-class _BackgroundDecoration extends StatefulWidget {
-  const _BackgroundDecoration({required this.pokemon});
+///
+class BackgroundDecoration extends StatefulWidget {
+  ///
+  const BackgroundDecoration({required this.pokemon, super.key});
 
+  ///
   final Pokemon pokemon;
 
   @override
-  State<_BackgroundDecoration> createState() => _BackgroundDecorationState();
+  State<BackgroundDecoration> createState() => _BackgroundDecorationState();
 }
 
-class _BackgroundDecorationState extends State<_BackgroundDecoration> {
+class _BackgroundDecorationState extends State<BackgroundDecoration> {
   Animation<double> get slideController =>
       PokemonInfoStateProvider.of(context).slideController;
   Animation<double> get rotateController =>

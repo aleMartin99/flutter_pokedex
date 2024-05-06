@@ -1,5 +1,8 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
+/// AppColors class
 class AppColors {
   static const Color primary = Color(0xFFCC0000);
   static const Color bug = Color(0xFF94BC4A);

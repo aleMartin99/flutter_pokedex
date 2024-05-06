@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/constants/pokemon_types.dart';
-import 'package:flutter_pokedex/core/services/capitalize_first_letter_service.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
+import 'package:flutter_pokedex/core/services/services_exports.dart';
 import 'package:flutter_pokedex/data/adapters/isar_pokemon.dart';
-import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model.dart';
-import 'package:flutter_pokedex/data/models/pokemon_model/stat.dart';
+import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model_exports.dart';
 
 /// Pokemon entity
 class Pokemon {

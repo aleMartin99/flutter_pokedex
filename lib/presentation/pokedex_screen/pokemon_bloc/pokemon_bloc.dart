@@ -3,7 +3,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/errors/failures.dart';
-import 'package:flutter_pokedex/core/utils/isar_helper.dart';
 import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/domain/usecases/get_pokemons/get_pokemons_usecase.dart';
@@ -57,7 +56,6 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
 
     on<OnToggleCapturedPokemonEvent>((event, emit) async {
       emit(state.copyWith(status: PokemonStatus.loadingToggleCaptured));
-//TODO error aqui al acceder al firstwhere y no hay ninguno q cumpla la condicion
       event.isCaptured
           //TODO call save to db useCase
           ? {
@@ -86,7 +84,7 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
               ),
               secureEmit(
                 state.copyWith(status: PokemonStatus.isNotCaptured),
-              )
+              ),
             };
     });
 
@@ -108,5 +106,5 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
   final GetPokemonsUsecase getPokemonsUsecase;
 
   ///
-  var isarDBHelper = sl<IsarHelper>();
+  IsarHelper isarDBHelper = sl<IsarHelper>();
 }

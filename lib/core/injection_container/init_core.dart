@@ -1,7 +1,7 @@
 // ignore_for_file: unnecessary_lambdas
 
 import 'dart:async';
-import 'package:flutter_pokedex/core/utils/isar_helper.dart';
+import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:flutter_pokedex/data/datasources/remote_datasource/ipokemon_datasource.dart';
 import 'package:flutter_pokedex/data/datasources/remote_datasource/pokemon_datasource/pokemon_datasource.dart';
 import 'package:flutter_pokedex/data/repositories/pokemon_repository.dart';
@@ -41,6 +41,7 @@ FutureOr<void> initCore(GetIt sl) async {
     ..registerLazySingleton<FilterBloc>(
       () => FilterBloc(),
     )
+    //TODO check IsarHelper singleton init core
     ..registerLazySingleton<IsarHelper>(
       () => IsarHelper(),
     );

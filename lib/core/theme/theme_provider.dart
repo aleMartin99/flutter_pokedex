@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/theme/theme.dart';
+import 'package:flutter_pokedex/core/theme/theme_exports.dart';
 
 /// ThemeProvider class
 class ThemeProvider with ChangeNotifier {

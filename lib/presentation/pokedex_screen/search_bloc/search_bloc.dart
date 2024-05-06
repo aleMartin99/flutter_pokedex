@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/utils/base_bloc.dart';
 

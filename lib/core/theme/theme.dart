@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_pokedex/core/theme/colors.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 
 ///
 ThemeData theme() {

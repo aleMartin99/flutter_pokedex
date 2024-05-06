@@ -5,8 +5,8 @@ import 'package:flutter_pokedex/core/shared_components/custom_scaffold.dart';
 class HeaderSection extends StatelessWidget implements PreferredSizeWidget {
   ///
   const HeaderSection({
-    super.key,
     required this.height,
+    super.key,
   });
 
   ///

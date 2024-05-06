@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+///
 class Stat extends Equatable {
+  ///
   const Stat({this.baseStat, this.statName});
 
   /// `dart:convert`
@@ -12,25 +14,18 @@ class Stat extends Equatable {
     return Stat.fromMap(data);
   }
 
+  ///
   factory Stat.fromMap(Map<String, dynamic> data) => Stat(
         baseStat: data['base_stat'] as int?,
         statName:
-            ((data['stat'] as Map<String, dynamic>)['name'] as String?) == null
-                ? ''
-                : ((data['stat'] as Map<String, dynamic>)['name'] as String?),
+            ((data['stat'] as Map<String, dynamic>)['name'] as String?) ?? '',
       );
-  final int? baseStat;
-  final String? statName;
 
-  Map<String, dynamic> toMap() => {
-        'base_stat': baseStat,
-        'stat': statName,
-      };
-
-  /// `dart:convert`
   ///
-  /// Converts [Stat] to a JSON string.
-  String toJson() => json.encode(toMap());
+  final int? baseStat;
+
+  ///
+  final String? statName;
 
   @override
   List<Object?> get props => [baseStat, statName];

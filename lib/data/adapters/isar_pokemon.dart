@@ -4,6 +4,7 @@ import 'package:isar/isar.dart';
 
 part 'isar_pokemon.g.dart';
 
+/// IsarPokemon class
 @collection
 class IsarPokemon {
   Id? id;

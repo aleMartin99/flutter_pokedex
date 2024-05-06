@@ -7,9 +7,11 @@ import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// IsarHelper class
 class IsarHelper {
   late Isar _instance;
 
+  ///
   Isar get instance => _instance;
 
   /// Initializes the isar database.

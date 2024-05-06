@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/auto_slideup_panel.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/main_tab_view.dart';
-import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_details_body.dart';
+import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_info_card_about.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_info_card_basestats.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
 

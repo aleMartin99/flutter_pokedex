@@ -1,17 +1,15 @@
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart' hide AnimatedSlide;
-import 'package:flutter_pokedex/core/constants/image_constants.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
-
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/animated_fade.dart';
+
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_info_card.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/components/pokemon_overall_info.dart';
 import 'package:flutter_pokedex/presentation/pokemon_details_screen/state_provider.dart';
 
 part 'pokemon_details_decoration.dart';
-part 'pokemon_info_card_about.dart';
 
 ///Pokemon details body class
 class PokemonDetailsBody extends StatefulWidget {
@@ -66,7 +64,7 @@ class PokemonInfoState extends State<PokemonDetailsBody>
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
-            _BackgroundDecoration(pokemon: widget.pokemon),
+            BackgroundDecoration(pokemon: widget.pokemon),
             PokemonInfoCard(
               pokemon: widget.pokemon,
             ),

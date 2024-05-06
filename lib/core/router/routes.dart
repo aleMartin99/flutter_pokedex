@@ -1,7 +1,5 @@
 /// AppRoutes class
 class AppRoutes {
-//TODO add splash screen
-
   /// path to access to home screen route
   static String get homeScreenRoute => '/home';
 

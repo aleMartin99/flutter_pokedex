@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_await_in_return
+// ignore_for_file: unnecessary_await_in_return, avoid_dynamic_calls
 
 import 'dart:async';
 import 'dart:convert';
@@ -6,18 +6,17 @@ import 'dart:convert';
 import 'package:flutter_pokedex/core/constants/api_helper.dart';
 import 'package:flutter_pokedex/core/errors/failures.dart';
 import 'package:flutter_pokedex/data/datasources/remote_datasource/datasource_exports.dart';
-import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model.dart';
+import 'package:flutter_pokedex/data/models/pokemon_model/pokemon_model_exports.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:http/http.dart' as http;
 
 /// PokemonDatasource implementation
 class PokemonDatasource implements IPokemonDatasource {
   @override
-  Future<Either<Failure, List<PokemonModel>>> getPokemons(
-    List<dynamic> pokemonSubset,
-  ) async {
+  Future<Either<Failure, List<PokemonModel>>> getPokemons() async {
+    /// get the 151 pokemos
     final resultFetchPokemonList = await fetchPokemonList();
-    final List<PokemonModel> pokemonModelListAux = [];
+    final pokemonModelListAux = <PokemonModel>[];
 
     if (resultFetchPokemonList.isRight()) {
       final resultFetchPokemonDetailsSubset = await fetchPokemonDetailsSubset(
@@ -25,8 +24,10 @@ class PokemonDatasource implements IPokemonDatasource {
             .sublist(0, 48),
       );
       if (resultFetchPokemonDetailsSubset.isRight()) {
-        pokemonModelListAux.addAll((resultFetchPokemonDetailsSubset as Right)
-            .value as List<PokemonModel>);
+        pokemonModelListAux.addAll(
+          (resultFetchPokemonDetailsSubset as Right).value
+              as List<PokemonModel>,
+        );
         final a = await fetchPokemonDetailsSubset(
           ((resultFetchPokemonList as Right).value as List<dynamic>)
               .sublist(49, 95),
@@ -42,7 +43,7 @@ class PokemonDatasource implements IPokemonDatasource {
             pokemonModelListAux
                 .addAll((b as Right).value as List<PokemonModel>);
             return right(
-              (pokemonModelListAux),
+              pokemonModelListAux,
             );
           } else {
             return left(const UnexpectedFailure());
@@ -110,7 +111,7 @@ Future<Either<Failure, List<PokemonModel>>> fetchPokemonDetailsSubset(
           .map((pokemon) {
         if (pokemon.isRight()) {
           return PokemonModel.fromJson(
-            ((pokemon) as Right).value as Map<String, dynamic>,
+            (pokemon as Right).value as Map<String, dynamic>,
           );
         } else {
           throw Exception();

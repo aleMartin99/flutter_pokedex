@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/constants/image_constants.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 
 ///Pokemon image class
 class PokemonImage extends StatelessWidget {
+  ///
   const PokemonImage({
     required this.pokemon,
     required this.size,
@@ -16,11 +17,22 @@ class PokemonImage extends StatelessWidget {
   });
   static const Size _cacheMaxSize = Size(700, 700);
 
+  ///
   final Pokemon pokemon;
+
+  ///
   final EdgeInsets padding;
+
+  ///
   final bool useHero;
+
+  ///
   final Size size;
+
+  ///
   final ImageProvider? placeholder;
+
+  ///
   final Color? tintColor;
 
   @override

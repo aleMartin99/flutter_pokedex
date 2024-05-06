@@ -1,11 +1,12 @@
+// ignore_for_file: avoid_dynamic_calls
+
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/router/router_exports.dart';
-import 'package:flutter_pokedex/core/services/order_alphabetically_service.dart';
-import 'package:flutter_pokedex/core/services/order_by_type.dart';
+import 'package:flutter_pokedex/core/services/services_exports.dart';
 import 'package:flutter_pokedex/core/shared_components/loading.dart';
 
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';

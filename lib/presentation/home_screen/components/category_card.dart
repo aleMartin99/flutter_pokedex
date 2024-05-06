@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/constants/image_constants.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 
 ///Category card class
 class CategoryCard extends StatelessWidget {

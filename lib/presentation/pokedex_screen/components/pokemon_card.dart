@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_pokedex/core/constants/image_constants.dart';
+import 'package:flutter_pokedex/core/constants/constants_exports.dart';
 import 'package:flutter_pokedex/core/shared_components/pokemon_type_card.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/presentation/pokedex_screen/components/pokemon_image.dart';
@@ -15,7 +15,10 @@ class PokemonCard extends StatelessWidget {
   static const double _pokeballFraction = 0.75;
   static const double _pokemonFraction = 0.76;
 
+  ///
   final Pokemon pokemon;
+
+  ///
   final void Function()? onPress;
 
   @override
@@ -127,7 +130,9 @@ class _CardContent extends StatelessWidget {
                 child: Text(
                   pokemon.name!,
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 14.5),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14.5,
+                  ),
                 ),
               ),
               const SizedBox(height: 10),

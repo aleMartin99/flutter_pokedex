@@ -1,3 +1,5 @@
+// ignore_for_file: public_member_api_docs
+
 import 'package:flutter/material.dart';
 
 class PokemonInfoStateProvider extends InheritedWidget {
@@ -12,11 +14,13 @@ class PokemonInfoStateProvider extends InheritedWidget {
   });
 
   static PokemonInfoStateProvider of(BuildContext context) {
-    final result = context.dependOnInheritedWidgetOfExactType<PokemonInfoStateProvider>();
+    final result =
+        context.dependOnInheritedWidgetOfExactType<PokemonInfoStateProvider>();
 
     return result!;
   }
 
   @override
-  bool updateShouldNotify(covariant PokemonInfoStateProvider oldWidget) => false;
+  bool updateShouldNotify(covariant PokemonInfoStateProvider oldWidget) =>
+      false;
 }
