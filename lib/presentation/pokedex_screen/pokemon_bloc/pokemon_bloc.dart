@@ -3,7 +3,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pokedex/core/errors/failures.dart';
-import 'package:flutter_pokedex/core/services/dynamic_color_service.dart';
 import 'package:flutter_pokedex/core/utils/isar_helper.dart';
 import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';

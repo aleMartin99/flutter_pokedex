@@ -5,7 +5,7 @@ import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 
 /// Method to convert from entity to dbAdapter
 IsarPokemon pokemonToDBAdapter(Pokemon pokemon) {
-  var isarPokemonAux = IsarPokemon();
+  final isarPokemonAux = IsarPokemon();
   isarPokemonAux
     ..id = pokemon.id
     ..name = pokemon.name

@@ -17,16 +17,39 @@ class PokemonDatasource implements IPokemonDatasource {
     List<dynamic> pokemonSubset,
   ) async {
     final resultFetchPokemonList = await fetchPokemonList();
+    final List<PokemonModel> pokemonModelListAux = [];
+
     if (resultFetchPokemonList.isRight()) {
       final resultFetchPokemonDetailsSubset = await fetchPokemonDetailsSubset(
         ((resultFetchPokemonList as Right).value as List<dynamic>)
-            .sublist(0, 20),
+            .sublist(0, 48),
       );
       if (resultFetchPokemonDetailsSubset.isRight()) {
-        return right(
-          (resultFetchPokemonDetailsSubset as Right).value
-              as List<PokemonModel>,
+        pokemonModelListAux.addAll((resultFetchPokemonDetailsSubset as Right)
+            .value as List<PokemonModel>);
+        final a = await fetchPokemonDetailsSubset(
+          ((resultFetchPokemonList as Right).value as List<dynamic>)
+              .sublist(49, 95),
         );
+
+        if (a.isRight()) {
+          pokemonModelListAux.addAll((a as Right).value as List<PokemonModel>);
+          final b = await fetchPokemonDetailsSubset(
+            ((resultFetchPokemonList as Right).value as List<dynamic>)
+                .sublist(96, 151),
+          );
+          if (b.isRight()) {
+            pokemonModelListAux
+                .addAll((b as Right).value as List<PokemonModel>);
+            return right(
+              (pokemonModelListAux),
+            );
+          } else {
+            return left(const UnexpectedFailure());
+          }
+        } else {
+          return left(const UnexpectedFailure());
+        }
       } else {
         return left(const UnexpectedFailure());
       }
@@ -45,7 +68,7 @@ Future<Either<Failure, List<dynamic>>> fetchPokemonList() async {
       ),
     );
     if (response.statusCode == 200) {
-      var data = jsonDecode(response.body);
+      final data = jsonDecode(response.body);
       return right(data['results'] as List<dynamic>);
     } else {
       throw Exception('Failed to load initial Pokémon list');
