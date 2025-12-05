@@ -2,7 +2,7 @@ name: flutter_pokedex
 description: "Code challenge para Flutter Developers."
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: '>=3.2.4 <4.0.0'

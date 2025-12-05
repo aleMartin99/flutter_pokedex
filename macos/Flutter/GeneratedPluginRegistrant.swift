@@ -8,7 +8,7 @@ import Foundation
 import isar_flutter_libs
 import path_provider_foundation
 import screen_retriever
-import sqflite
+import sqflite_darwin
 import window_manager
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
