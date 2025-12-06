@@ -6,10 +6,37 @@ sealed class PokemonEvent extends Equatable {}
 ///OnLoadPokemonsEvent class
 class OnLoadPokemonsEvent extends PokemonEvent {
   ///
-  OnLoadPokemonsEvent();
+  OnLoadPokemonsEvent({
+    this.offset = 0,
+    this.limit = 20,
+  });
+
+  /// The offset for pagination
+  final int offset;
+
+  /// The number of pokemons to fetch
+  final int limit;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [offset, limit];
+}
+
+///OnLoadMorePokemonsEvent class - Loads more pokemons for pagination
+class OnLoadMorePokemonsEvent extends PokemonEvent {
+  ///
+  OnLoadMorePokemonsEvent({
+    required this.offset,
+    this.limit = 20,
+  });
+
+  /// The offset for pagination
+  final int offset;
+
+  /// The number of pokemons to fetch
+  final int limit;
+
+  @override
+  List<Object> get props => [offset, limit];
 }
 
 ///

@@ -14,8 +14,14 @@ class PokemonRepository implements IPokemonRemoteRepository {
   final IPokemonDatasource datasource;
 
   @override
-  Future<Either<Failure, List<Pokemon>>> getPokemons() async {
-    final getPokemonsResponse = await datasource.getPokemons();
+  Future<Either<Failure, List<Pokemon>>> getPokemons({
+    int offset = 0,
+    int limit = 20,
+  }) async {
+    final getPokemonsResponse = await datasource.getPokemons(
+      offset: offset,
+      limit: limit,
+    );
     if (getPokemonsResponse.isRight()) {
       final pokemonsModelList =
           (getPokemonsResponse as Right).value as List<PokemonModel>;

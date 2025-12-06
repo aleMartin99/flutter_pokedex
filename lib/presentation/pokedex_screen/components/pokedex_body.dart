@@ -18,10 +18,7 @@ class _PokedexBodyState extends State<PokedexBody> {
     return PokeballScaffold(
       body: const Stack(
         children: [
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: PokemonGrid(),
-          ),
+          PokemonGrid(),
         ],
       ),
     );

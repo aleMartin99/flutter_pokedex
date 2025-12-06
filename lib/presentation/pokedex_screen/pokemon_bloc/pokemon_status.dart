@@ -5,6 +5,7 @@ part of 'pokemon_bloc.dart';
 enum PokemonStatus {
   initial,
   loading,
+  loadingMore,
   loadingToggleCaptured,
   successLoadCaptured,
   success,

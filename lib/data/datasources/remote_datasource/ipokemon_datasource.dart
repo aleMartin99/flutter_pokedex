@@ -7,5 +7,10 @@ import 'package:fpdart/fpdart.dart';
 /// Pokemon Datasource interface
 abstract class IPokemonDatasource {
   /// getPokemons method for IPokemonDatarsource
-  Future<Either<Failure, List<PokemonModel>>> getPokemons();
+  /// [offset] - The offset for pagination (default: 0)
+  /// [limit] - The number of pokemons to fetch (default: 20)
+  Future<Either<Failure, List<PokemonModel>>> getPokemons({
+    int offset = 0,
+    int limit = 20,
+  });
 }

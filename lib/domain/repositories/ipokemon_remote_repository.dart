@@ -6,6 +6,11 @@ import 'package:fpdart/fpdart.dart';
 
 /// Remote Pokemon repository interface
 abstract class IPokemonRemoteRepository {
-  ///
-  Future<Either<Failure, List<Pokemon>>> getPokemons();
+  /// Gets a list of pokemons with pagination
+  /// [offset] - The offset for pagination (default: 0)
+  /// [limit] - The number of pokemons to fetch (default: 20)
+  Future<Either<Failure, List<Pokemon>>> getPokemons({
+    int offset = 0,
+    int limit = 20,
+  });
 }

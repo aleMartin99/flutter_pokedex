@@ -13,66 +13,64 @@ import 'package:http/http.dart' as http;
 /// PokemonDatasource implementation
 class PokemonDatasource implements IPokemonDatasource {
   @override
-  Future<Either<Failure, List<PokemonModel>>> getPokemons() async {
-    /// get the 151 pokemos
-    final resultFetchPokemonList = await fetchPokemonList();
-    final pokemonModelListAux = <PokemonModel>[];
+  Future<Either<Failure, List<PokemonModel>>> getPokemons({
+    int offset = 0,
+    int limit = 20,
+  }) async {
+    final resultFetchPokemonList = await fetchPokemonList(
+      offset: offset,
+      limit: limit,
+    );
 
-    if (resultFetchPokemonList.isRight()) {
-      final resultFetchPokemonDetailsSubset = await fetchPokemonDetailsSubset(
-        ((resultFetchPokemonList as Right).value as List<dynamic>)
-            .sublist(0, 48),
-      );
-      if (resultFetchPokemonDetailsSubset.isRight()) {
-        pokemonModelListAux.addAll(
-          (resultFetchPokemonDetailsSubset as Right).value
-              as List<PokemonModel>,
-        );
-        final a = await fetchPokemonDetailsSubset(
-          ((resultFetchPokemonList as Right).value as List<dynamic>)
-              .sublist(49, 95),
-        );
-
-        if (a.isRight()) {
-          pokemonModelListAux.addAll((a as Right).value as List<PokemonModel>);
-          final b = await fetchPokemonDetailsSubset(
-            ((resultFetchPokemonList as Right).value as List<dynamic>)
-                .sublist(96, 151),
-          );
-          if (b.isRight()) {
-            pokemonModelListAux
-                .addAll((b as Right).value as List<PokemonModel>);
-            return right(
-              pokemonModelListAux,
-            );
-          } else {
-            return left(const UnexpectedFailure());
-          }
-        } else {
-          return left(const UnexpectedFailure());
-        }
-      } else {
-        return left(const UnexpectedFailure());
-      }
-    } else {
-      return left(const UnexpectedFailure());
+    if (resultFetchPokemonList.isLeft()) {
+      return left((resultFetchPokemonList as Left).value as Failure);
     }
+
+    final pokemonList =
+        (resultFetchPokemonList as Right).value as List<dynamic>;
+
+    if (pokemonList.isEmpty) {
+      return right(<PokemonModel>[]);
+    }
+
+    final resultFetchPokemonDetails = await fetchPokemonDetailsSubset(
+      pokemonList,
+    );
+
+    if (resultFetchPokemonDetails.isLeft()) {
+      return left((resultFetchPokemonDetails as Left).value as Failure);
+    }
+
+    return right(
+      (resultFetchPokemonDetails as Right).value as List<PokemonModel>,
+    );
   }
 }
 
-/// Fetches the list of Pokémon
-Future<Either<Failure, List<dynamic>>> fetchPokemonList() async {
+/// Fetches the list of Pokémon with pagination
+Future<Either<Failure, List<dynamic>>> fetchPokemonList({
+  int offset = 0,
+  int limit = 20,
+}) async {
   try {
     final response = await http.get(
       Uri.parse(
-        ApiHelper.baseUrl + ApiHelper.getPokemonsUrl,
+        ApiHelper.baseUrl +
+            ApiHelper.getPokemonsUrl(
+              offset: offset,
+              limit: limit,
+            ),
       ),
     );
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       return right(data['results'] as List<dynamic>);
     } else {
-      throw Exception('Failed to load initial Pokémon list');
+      return left(
+        ServerFailure(
+          message: 'Failed to load Pokémon list: ${response.statusCode}',
+        ),
+      );
     }
   } catch (e) {
     return left(UnexpectedFailure(message: e.toString()));

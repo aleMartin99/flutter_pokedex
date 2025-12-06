@@ -6,6 +6,7 @@ import 'package:flutter_pokedex/core/errors/failures.dart';
 import 'package:flutter_pokedex/core/utils/utils_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:flutter_pokedex/domain/usecases/get_captured_pokemons/get_captured_pokemons_usecase.dart';
+import 'package:flutter_pokedex/domain/usecases/get_pokemons/get_pokemons_params.dart';
 import 'package:flutter_pokedex/domain/usecases/get_pokemons/get_pokemons_usecase.dart';
 import 'package:flutter_pokedex/domain/usecases/insert_captured_pokemon/insert_captured_pokemon_exports.dart';
 import 'package:flutter_pokedex/domain/usecases/remove_captured_pokemon/remove_captured_pokemon_exports.dart';
@@ -25,10 +26,20 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
     required this.removeCapturedPokemonUseCase,
   }) : super(const PokemonState()) {
     on<OnLoadPokemonsEvent>((event, emit) async {
-      emit(state.copyWith(status: PokemonStatus.loading));
+      emit(
+        state.copyWith(
+          status: PokemonStatus.loading,
+          hasReachedMax: false,
+        ),
+      );
 
-      /// call the usecase instance
-      final responseGetPokemons = await getPokemonsUsecase(NoParams());
+      /// call the usecase instance with pagination parameters
+      final responseGetPokemons = await getPokemonsUsecase(
+        GetPokemonsParams(
+          offset: event.offset,
+          limit: event.limit,
+        ),
+      );
       if (responseGetPokemons.isRight()) {
         final pokemonsList =
             (responseGetPokemons as Right).value as List<Pokemon>? ?? [];
@@ -43,10 +54,14 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
           }
         }
 
+        /// Check if we've reached the end (less items than requested)
+        final hasReachedMax = pokemonsList.length < event.limit;
+
         secureEmit(
           state.copyWith(
             status: PokemonStatus.success,
             pokemonsList: pokemonsList,
+            hasReachedMax: hasReachedMax,
           ),
         );
       } else {
@@ -55,6 +70,63 @@ class PokemonBloc extends Bloc<PokemonEvent, PokemonState> with BaseBloc {
           state.copyWith(
             failure: failure.message,
             status: PokemonStatus.failure,
+          ),
+        );
+      }
+    });
+
+    on<OnLoadMorePokemonsEvent>((event, emit) async {
+      if (state.hasReachedMax || state.isLoadingMore) {
+        return;
+      }
+
+      emit(state.copyWith(isLoadingMore: true, status: PokemonStatus.loadingMore));
+
+      /// call the usecase instance with pagination parameters
+      final responseGetPokemons = await getPokemonsUsecase(
+        GetPokemonsParams(
+          offset: event.offset,
+          limit: event.limit,
+        ),
+      );
+      if (responseGetPokemons.isRight()) {
+        final newPokemonsList =
+            (responseGetPokemons as Right).value as List<Pokemon>? ?? [];
+
+        /// Checks if the pokemon is already captured
+        for (var i = 0; i < newPokemonsList.length; i++) {
+          if (state.capturedPokemonsList
+              .where((element) => element.id == newPokemonsList[i].id)
+              .isNotEmpty) {
+            /// Mark the pokemon as captured in the pokemonsList
+            newPokemonsList[i].isCaptured = true;
+          }
+        }
+
+        /// Check if we've reached the end (less items than requested)
+        final hasReachedMax = newPokemonsList.length < event.limit;
+
+        /// Accumulate the new pokemons with the existing ones
+        final updatedPokemonsList = [
+          ...state.pokemonsList,
+          ...newPokemonsList,
+        ];
+
+        secureEmit(
+          state.copyWith(
+            status: PokemonStatus.success,
+            pokemonsList: updatedPokemonsList,
+            hasReachedMax: hasReachedMax,
+            isLoadingMore: false,
+          ),
+        );
+      } else {
+        final failure = (responseGetPokemons as Left).value as Failure;
+        secureEmit(
+          state.copyWith(
+            failure: failure.message,
+            status: PokemonStatus.failure,
+            isLoadingMore: false,
           ),
         );
       }
