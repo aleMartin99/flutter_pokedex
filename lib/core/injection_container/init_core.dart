@@ -9,6 +9,7 @@ import 'package:flutter_pokedex/data/repositories/pokemon_repository.dart';
 import 'package:flutter_pokedex/domain/repositories/ipokemon_local_repository.dart';
 import 'package:flutter_pokedex/domain/repositories/ipokemon_remote_repository.dart';
 import 'package:flutter_pokedex/domain/usecases/get_captured_pokemons/get_captured_pokemons_usecase.dart';
+import 'package:flutter_pokedex/domain/usecases/get_evolution_chain/get_evolution_chain_usecase.dart';
 import 'package:flutter_pokedex/domain/usecases/get_pokemons/get_pokemons_usecase.dart';
 import 'package:flutter_pokedex/domain/usecases/insert_captured_pokemon/insert_captured_pokemon_exports.dart';
 import 'package:flutter_pokedex/domain/usecases/remove_captured_pokemon/remove_captured_pokemon_exports.dart';
@@ -46,6 +47,11 @@ FutureOr<void> initCore(GetIt sl) async {
     ..registerLazySingleton<GetCapturedPokemonsUsecase>(
       () => GetCapturedPokemonsUsecase(
         getCapturedPokemons: sl<IPokemonLocalRepository>().getCapturedPokemons,
+      ),
+    )
+    ..registerLazySingleton<GetEvolutionChainUsecase>(
+      () => GetEvolutionChainUsecase(
+        getEvolutionChain: sl<IPokemonRemoteRepository>().getEvolutionChain,
       ),
     )
     ..registerLazySingleton<InsertCapturedPokemonUseCase>(

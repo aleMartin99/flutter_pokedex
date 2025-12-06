@@ -1,6 +1,7 @@
 // ignore_for_file: one_member_abstracts
 
 import 'package:flutter_pokedex/core/errors/failures.dart';
+import 'package:flutter_pokedex/data/models/remote_models/remote_models_exports.dart';
 import 'package:flutter_pokedex/domain/entities/pokemon.dart';
 import 'package:fpdart/fpdart.dart';
 
@@ -13,4 +14,10 @@ abstract class IPokemonRemoteRepository {
     int offset = 0,
     int limit = 20,
   });
+
+  /// Gets the evolution chain for a Pokemon
+  /// [pokemonId] - The Pokemon ID to get evolution chain for
+  Future<Either<Failure, EvolutionChainModel>> getEvolutionChain(
+    int pokemonId,
+  );
 }

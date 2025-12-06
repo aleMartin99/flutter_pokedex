@@ -45,6 +45,47 @@ class PokemonDatasource implements IPokemonDatasource {
       (resultFetchPokemonDetails as Right).value as List<PokemonModel>,
     );
   }
+
+  @override
+  Future<Either<Failure, EvolutionChainModel>> getEvolutionChain(
+    int pokemonId,
+  ) async {
+    // First, get the Pokemon species to get the evolution chain URL
+    final speciesResult = await fetchPokemonSpecies(pokemonId);
+
+    if (speciesResult.isLeft()) {
+      return left((speciesResult as Left).value as Failure);
+    }
+
+    final speciesData = (speciesResult as Right).value as Map<String, dynamic>;
+    final evolutionChainUrl = (speciesData['evolution_chain']
+        as Map<String, dynamic>?)?['url'] as String?;
+
+    if (evolutionChainUrl == null) {
+      return left(
+        const ServerFailure(
+          message: 'Evolution chain URL not found for this Pokemon',
+        ),
+      );
+    }
+
+    // Extract evolution chain ID from URL
+    final uri = Uri.parse(evolutionChainUrl);
+    final pathSegments = uri.pathSegments;
+    final evolutionChainId =
+        int.tryParse(pathSegments[pathSegments.length - 2]);
+
+    if (evolutionChainId == null) {
+      return left(
+        const ServerFailure(
+          message: 'Invalid evolution chain URL',
+        ),
+      );
+    }
+
+    // Fetch the evolution chain
+    return await fetchEvolutionChain(evolutionChainId);
+  }
 }
 
 /// Fetches the list of Pokémon with pagination
@@ -116,6 +157,51 @@ Future<Either<Failure, List<PokemonModel>>> fetchPokemonDetailsSubset(
         }
       }).toList(),
     );
+  } catch (e) {
+    return left(UnexpectedFailure(message: e.toString()));
+  }
+}
+
+/// Fetches Pokemon species data
+Future<Either<Failure, Map<String, dynamic>>> fetchPokemonSpecies(
+  int pokemonId,
+) async {
+  try {
+    final response = await http.get(
+      Uri.parse('${ApiHelper.baseUrl}pokemon-species/$pokemonId/'),
+    );
+    if (response.statusCode == 200) {
+      return right(jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      return left(
+        ServerFailure(
+          message: 'Failed to load Pokemon species: ${response.statusCode}',
+        ),
+      );
+    }
+  } catch (e) {
+    return left(UnexpectedFailure(message: e.toString()));
+  }
+}
+
+/// Fetches evolution chain data
+Future<Either<Failure, EvolutionChainModel>> fetchEvolutionChain(
+  int evolutionChainId,
+) async {
+  try {
+    final response = await http.get(
+      Uri.parse('${ApiHelper.baseUrl}evolution-chain/$evolutionChainId/'),
+    );
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body) as Map<String, dynamic>;
+      return right(EvolutionChainModel.fromJson(data));
+    } else {
+      return left(
+        ServerFailure(
+          message: 'Failed to load evolution chain: ${response.statusCode}',
+        ),
+      );
+    }
   } catch (e) {
     return left(UnexpectedFailure(message: e.toString()));
   }

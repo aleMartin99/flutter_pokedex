@@ -13,4 +13,10 @@ abstract class IPokemonDatasource {
     int offset = 0,
     int limit = 20,
   });
+
+  /// getEvolutionChain method for IPokemonDatasource
+  /// [pokemonId] - The Pokemon ID to get evolution chain for
+  Future<Either<Failure, EvolutionChainModel>> getEvolutionChain(
+    int pokemonId,
+  );
 }

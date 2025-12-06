@@ -38,4 +38,11 @@ class PokemonRepository implements IPokemonRemoteRepository {
       return left((getPokemonsResponse as Left).value as Failure);
     }
   }
+
+  @override
+  Future<Either<Failure, EvolutionChainModel>> getEvolutionChain(
+    int pokemonId,
+  ) async {
+    return await datasource.getEvolutionChain(pokemonId);
+  }
 }
